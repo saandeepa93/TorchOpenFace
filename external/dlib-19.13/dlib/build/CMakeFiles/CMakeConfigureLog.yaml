@@ -1,0 +1,976 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineSystem.cmake:204 (message)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      The system is: Linux - 5.15.0-91-generic - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/local/bin/cc 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/3.26.4/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/c++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/3.26.4/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-S2VSzq"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-S2VSzq"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-S2VSzq
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ac5db/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ac5db.dir/build.make CMakeFiles/cmTC_ac5db.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-S2VSzq'
+        Building C object CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o
+        /usr/local/bin/cc   -v -o CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o -c /home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/local/bin/cc
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ac5db.dir/'
+         /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -v -imultiarch x86_64-linux-gnu /home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_ac5db.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc8KoIUc.s
+        GNU C17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-linux-gnu/11/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        GNU C17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: 50eaa2331df977b8016186198deb2d18
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ac5db.dir/'
+         as -v --64 -o CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o /tmp/cc8KoIUc.s
+        GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_ac5db
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ac5db.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -v -rdynamic CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o -o cmTC_ac5db 
+        Using built-in specs.
+        COLLECT_GCC=/usr/local/bin/cc
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_ac5db' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_ac5db.'
+         /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccg9F852.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_ac5db /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_ac5db' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_ac5db.'
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-S2VSzq'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+          add: [/usr/local/include]
+          add: [/usr/include/x86_64-linux-gnu]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/11/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/lib/gcc/x86_64-linux-gnu/11/include;/usr/local/include;/usr/include/x86_64-linux-gnu;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-S2VSzq]
+        ignore line: []
+        ignore line: [Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ac5db/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ac5db.dir/build.make CMakeFiles/cmTC_ac5db.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-S2VSzq']
+        ignore line: [Building C object CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/local/bin/cc   -v -o CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o -c /home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/local/bin/cc]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ac5db.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -v -imultiarch x86_64-linux-gnu /home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_ac5db.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc8KoIUc.s]
+        ignore line: [GNU C17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: 50eaa2331df977b8016186198deb2d18]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ac5db.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o /tmp/cc8KoIUc.s]
+        ignore line: [GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_ac5db]
+        ignore line: [/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ac5db.dir/link.txt --verbose=1]
+        ignore line: [/usr/local/bin/cc  -v -rdynamic CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o -o cmTC_ac5db ]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/local/bin/cc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_ac5db' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_ac5db.']
+        link line: [ /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccg9F852.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_ac5db /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccg9F852.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-export-dynamic] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_ac5db] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..]
+          arg [CMakeFiles/cmTC_ac5db.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11] ==> [/usr/lib/gcc/x86_64-linux-gnu/11]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> [/usr/lib]
+        implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/11;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hFPPxk"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hFPPxk"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hFPPxk
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ca755/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ca755.dir/build.make CMakeFiles/cmTC_ca755.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hFPPxk'
+        Building CXX object CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -v -o CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o -c /home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ca755.dir/'
+         /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_ca755.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccUiE4wc.s
+        GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/include/c++/11
+         /usr/include/x86_64-linux-gnu/c++/11
+         /usr/include/c++/11/backward
+         /usr/lib/gcc/x86_64-linux-gnu/11/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 11.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: d591828bb4d392ae8b7b160e5bb0b95f
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ca755.dir/'
+         as -v --64 -o CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccUiE4wc.s
+        GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_ca755
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ca755.dir/link.txt --verbose=1
+        /usr/bin/c++  -v -rdynamic CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_ca755 
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+        COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_ca755' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_ca755.'
+         /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccOjBApG.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_ca755 /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_ca755' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_ca755.'
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hFPPxk'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/include/c++/11]
+          add: [/usr/include/x86_64-linux-gnu/c++/11]
+          add: [/usr/include/c++/11/backward]
+          add: [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+          add: [/usr/local/include]
+          add: [/usr/include/x86_64-linux-gnu]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/include/c++/11] ==> [/usr/include/c++/11]
+        collapse include dir [/usr/include/x86_64-linux-gnu/c++/11] ==> [/usr/include/x86_64-linux-gnu/c++/11]
+        collapse include dir [/usr/include/c++/11/backward] ==> [/usr/include/c++/11/backward]
+        collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/11/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/11/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/include/c++/11;/usr/include/x86_64-linux-gnu/c++/11;/usr/include/c++/11/backward;/usr/lib/gcc/x86_64-linux-gnu/11/include;/usr/local/include;/usr/include/x86_64-linux-gnu;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hFPPxk]
+        ignore line: []
+        ignore line: [Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ca755/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ca755.dir/build.make CMakeFiles/cmTC_ca755.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hFPPxk']
+        ignore line: [Building CXX object CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o -c /home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ca755.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_ca755.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccUiE4wc.s]
+        ignore line: [GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/11"]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/11/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/include/c++/11]
+        ignore line: [ /usr/include/x86_64-linux-gnu/c++/11]
+        ignore line: [ /usr/include/c++/11/backward]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/11/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C++17 (Ubuntu 11.4.0-1ubuntu1~22.04) version 11.4.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 11.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: d591828bb4d392ae8b7b160e5bb0b95f]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ca755.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccUiE4wc.s]
+        ignore line: [GNU assembler version 2.38 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.38]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_ca755]
+        ignore line: [/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ca755.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/c++  -v -rdynamic CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_ca755 ]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c ada c++ go brig d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) ]
+        ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/11/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_ca755' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_ca755.']
+        link line: [ /usr/lib/gcc/x86_64-linux-gnu/11/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccOjBApG.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_ca755 /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/11/../../.. CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccOjBApG.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-export-dynamic] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_ca755] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..]
+          arg [CMakeFiles/cmTC_ca755.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11] ==> [/usr/lib/gcc/x86_64-linux-gnu/11]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/11/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o;/usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/11;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckCSourceCompiles.cmake:76 (cmake_check_source_compiles)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "CMakeLists.txt:284 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hcEJ51"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hcEJ51"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hcEJ51
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b0d09/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b0d09.dir/build.make CMakeFiles/cmTC_b0d09.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hcEJ51'
+        Building C object CMakeFiles/cmTC_b0d09.dir/src.c.o
+        /usr/local/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_b0d09.dir/src.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hcEJ51/src.c
+        Linking C executable cmTC_b0d09
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b0d09.dir/link.txt --verbose=1
+        /usr/local/bin/cc -rdynamic CMakeFiles/cmTC_b0d09.dir/src.c.o -o cmTC_b0d09 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-hcEJ51'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckLibraryExists.cmake:71 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/FindX11.cmake:498 (check_library_exists)"
+      - "CMakeLists.txt:353 (include)"
+    checks:
+      - "Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-WhXLGM"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-WhXLGM"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "X11_LIB_X11_SOLO"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-WhXLGM
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_beb28/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_beb28.dir/build.make CMakeFiles/cmTC_beb28.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-WhXLGM'
+        Building C object CMakeFiles/cmTC_beb28.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay -o CMakeFiles/cmTC_beb28.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-WhXLGM/CheckFunctionExists.c
+        Linking C executable cmTC_beb28
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_beb28.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=XOpenDisplay -rdynamic CMakeFiles/cmTC_beb28.dir/CheckFunctionExists.c.o -o cmTC_beb28  /usr/lib/x86_64-linux-gnu/libX11.so /usr/lib/x86_64-linux-gnu/libXext.so 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-WhXLGM'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/FindX11.cmake:513 (check_function_exists)"
+      - "CMakeLists.txt:353 (include)"
+    checks:
+      - "Looking for gethostbyname"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-RL0gtz"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-RL0gtz"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_GETHOSTBYNAME"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-RL0gtz
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_26aca/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_26aca.dir/build.make CMakeFiles/cmTC_26aca.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-RL0gtz'
+        Building C object CMakeFiles/cmTC_26aca.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname -o CMakeFiles/cmTC_26aca.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-RL0gtz/CheckFunctionExists.c
+        Linking C executable cmTC_26aca
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_26aca.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=gethostbyname -rdynamic CMakeFiles/cmTC_26aca.dir/CheckFunctionExists.c.o -o cmTC_26aca 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-RL0gtz'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/FindX11.cmake:527 (check_function_exists)"
+      - "CMakeLists.txt:353 (include)"
+    checks:
+      - "Looking for connect"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oR7L1D"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oR7L1D"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_CONNECT"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oR7L1D
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_80628/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_80628.dir/build.make CMakeFiles/cmTC_80628.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oR7L1D'
+        Building C object CMakeFiles/cmTC_80628.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=connect -o CMakeFiles/cmTC_80628.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oR7L1D/CheckFunctionExists.c
+        Linking C executable cmTC_80628
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_80628.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=connect -rdynamic CMakeFiles/cmTC_80628.dir/CheckFunctionExists.c.o -o cmTC_80628 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oR7L1D'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/FindX11.cmake:536 (check_function_exists)"
+      - "CMakeLists.txt:353 (include)"
+    checks:
+      - "Looking for remove"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oRSnlG"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oRSnlG"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_REMOVE"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oRSnlG
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_e529e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_e529e.dir/build.make CMakeFiles/cmTC_e529e.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oRSnlG'
+        Building C object CMakeFiles/cmTC_e529e.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=remove -o CMakeFiles/cmTC_e529e.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oRSnlG/CheckFunctionExists.c
+        Linking C executable cmTC_e529e
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e529e.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=remove -rdynamic CMakeFiles/cmTC_e529e.dir/CheckFunctionExists.c.o -o cmTC_e529e 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-oRSnlG'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/FindX11.cmake:545 (check_function_exists)"
+      - "CMakeLists.txt:353 (include)"
+    checks:
+      - "Looking for shmat"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-O95LpH"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-O95LpH"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_SHMAT"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-O95LpH
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_76528/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_76528.dir/build.make CMakeFiles/cmTC_76528.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-O95LpH'
+        Building C object CMakeFiles/cmTC_76528.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat -o CMakeFiles/cmTC_76528.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-O95LpH/CheckFunctionExists.c
+        Linking C executable cmTC_76528
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_76528.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=shmat -rdynamic CMakeFiles/cmTC_76528.dir/CheckFunctionExists.c.o -o cmTC_76528 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-O95LpH'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckLibraryExists.cmake:71 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/FindX11.cmake:555 (check_library_exists)"
+      - "CMakeLists.txt:353 (include)"
+    checks:
+      - "Looking for IceConnectionNumber in ICE"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-X6r99j"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-X6r99j"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_LIB_ICE_HAS_ICECONNECTIONNUMBER"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-X6r99j
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_e9f55/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_e9f55.dir/build.make CMakeFiles/cmTC_e9f55.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-X6r99j'
+        Building C object CMakeFiles/cmTC_e9f55.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber -o CMakeFiles/cmTC_e9f55.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-X6r99j/CheckFunctionExists.c
+        Linking C executable cmTC_e9f55
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e9f55.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=IceConnectionNumber -rdynamic CMakeFiles/cmTC_e9f55.dir/CheckFunctionExists.c.o -o cmTC_e9f55  -lICE 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-X6r99j'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "CMakeLists.txt:404 (CHECK_FUNCTION_EXISTS)"
+    checks:
+      - "Looking for png_create_read_struct"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-uyGere"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-uyGere"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "LIBPNG_IS_GOOD"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-uyGere
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_64aa3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_64aa3.dir/build.make CMakeFiles/cmTC_64aa3.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-uyGere'
+        Building C object CMakeFiles/cmTC_64aa3.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=png_create_read_struct -o CMakeFiles/cmTC_64aa3.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-uyGere/CheckFunctionExists.c
+        Linking C executable cmTC_64aa3
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_64aa3.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=png_create_read_struct -rdynamic CMakeFiles/cmTC_64aa3.dir/CheckFunctionExists.c.o -o cmTC_64aa3  -Wl,-rpath,/home/saandeepaath-admin/anaconda3/envs/cpp/lib /usr/lib/x86_64-linux-gnu/libpng.so /home/saandeepaath-admin/anaconda3/envs/cpp/lib/libz.so 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-uyGere'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "CMakeLists.txt:473 (CHECK_FUNCTION_EXISTS)"
+    checks:
+      - "Looking for jpeg_read_header"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-zaSRlL"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-zaSRlL"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "LIBJPEG_IS_GOOD"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-zaSRlL
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_f245a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f245a.dir/build.make CMakeFiles/cmTC_f245a.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-zaSRlL'
+        Building C object CMakeFiles/cmTC_f245a.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=jpeg_read_header -o CMakeFiles/cmTC_f245a.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-zaSRlL/CheckFunctionExists.c
+        Linking C executable cmTC_f245a
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f245a.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=jpeg_read_header -rdynamic CMakeFiles/cmTC_f245a.dir/CheckFunctionExists.c.o -o cmTC_f245a  /usr/lib/x86_64-linux-gnu/libjpeg.so 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-zaSRlL'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckIncludeFile.cmake:95 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckTypeSize.cmake:252 (check_include_file)"
+      - "cmake_utils/find_blas.cmake:80 (check_type_size)"
+      - "CMakeLists.txt:537 (include)"
+    checks:
+      - "Looking for sys/types.h"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-eKhpI3"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-eKhpI3"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HAVE_SYS_TYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-eKhpI3
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b9e10/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b9e10.dir/build.make CMakeFiles/cmTC_b9e10.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-eKhpI3'
+        Building C object CMakeFiles/cmTC_b9e10.dir/CheckIncludeFile.c.o
+        /usr/local/bin/cc    -o CMakeFiles/cmTC_b9e10.dir/CheckIncludeFile.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-eKhpI3/CheckIncludeFile.c
+        Linking C executable cmTC_b9e10
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b9e10.dir/link.txt --verbose=1
+        /usr/local/bin/cc -rdynamic CMakeFiles/cmTC_b9e10.dir/CheckIncludeFile.c.o -o cmTC_b9e10 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-eKhpI3'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckIncludeFile.cmake:95 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckTypeSize.cmake:253 (check_include_file)"
+      - "cmake_utils/find_blas.cmake:80 (check_type_size)"
+      - "CMakeLists.txt:537 (include)"
+    checks:
+      - "Looking for stdint.h"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-kUF3o3"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-kUF3o3"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HAVE_STDINT_H"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-kUF3o3
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_9026f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9026f.dir/build.make CMakeFiles/cmTC_9026f.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-kUF3o3'
+        Building C object CMakeFiles/cmTC_9026f.dir/CheckIncludeFile.c.o
+        /usr/local/bin/cc    -o CMakeFiles/cmTC_9026f.dir/CheckIncludeFile.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-kUF3o3/CheckIncludeFile.c
+        Linking C executable cmTC_9026f
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9026f.dir/link.txt --verbose=1
+        /usr/local/bin/cc -rdynamic CMakeFiles/cmTC_9026f.dir/CheckIncludeFile.c.o -o cmTC_9026f 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-kUF3o3'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckIncludeFile.cmake:95 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckTypeSize.cmake:254 (check_include_file)"
+      - "cmake_utils/find_blas.cmake:80 (check_type_size)"
+      - "CMakeLists.txt:537 (include)"
+    checks:
+      - "Looking for stddef.h"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-PxzoZl"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-PxzoZl"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HAVE_STDDEF_H"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-PxzoZl
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_987e0/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_987e0.dir/build.make CMakeFiles/cmTC_987e0.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-PxzoZl'
+        Building C object CMakeFiles/cmTC_987e0.dir/CheckIncludeFile.c.o
+        /usr/local/bin/cc    -o CMakeFiles/cmTC_987e0.dir/CheckIncludeFile.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-PxzoZl/CheckIncludeFile.c
+        Linking C executable cmTC_987e0
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_987e0.dir/link.txt --verbose=1
+        /usr/local/bin/cc -rdynamic CMakeFiles/cmTC_987e0.dir/CheckIncludeFile.c.o -o cmTC_987e0 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-PxzoZl'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckTypeSize.cmake:148 (try_compile)"
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckTypeSize.cmake:273 (__check_type_size_impl)"
+      - "cmake_utils/find_blas.cmake:80 (check_type_size)"
+      - "CMakeLists.txt:537 (include)"
+    checks:
+      - "Check size of void*"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-qDMGBZ"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-qDMGBZ"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "HAVE_SIZE_OF_VOID_PTR"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-qDMGBZ
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_2324e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2324e.dir/build.make CMakeFiles/cmTC_2324e.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-qDMGBZ'
+        Building C object CMakeFiles/cmTC_2324e.dir/SIZE_OF_VOID_PTR.c.o
+        /usr/local/bin/cc    -o CMakeFiles/cmTC_2324e.dir/SIZE_OF_VOID_PTR.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-qDMGBZ/SIZE_OF_VOID_PTR.c
+        Linking C executable cmTC_2324e
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2324e.dir/link.txt --verbose=1
+        /usr/local/bin/cc -rdynamic CMakeFiles/cmTC_2324e.dir/SIZE_OF_VOID_PTR.c.o -o cmTC_2324e  /usr/lib/x86_64-linux-gnu/libjpeg.so 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-qDMGBZ'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "cmake_utils/find_blas.cmake:357 (check_function_exists)"
+      - "CMakeLists.txt:537 (include)"
+    checks:
+      - "Looking for sgesv"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-4yoQ2c"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-4yoQ2c"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "LAPACK_FOUND_C_UNMANGLED"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-4yoQ2c
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_339e3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_339e3.dir/build.make CMakeFiles/cmTC_339e3.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-4yoQ2c'
+        Building C object CMakeFiles/cmTC_339e3.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=sgesv -o CMakeFiles/cmTC_339e3.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-4yoQ2c/CheckFunctionExists.c
+        Linking C executable cmTC_339e3
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_339e3.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=sgesv -rdynamic CMakeFiles/cmTC_339e3.dir/CheckFunctionExists.c.o -o cmTC_339e3  -Wl,-rpath,/home/saandeepaath-admin/anaconda3/envs/cpp/lib /home/saandeepaath-admin/anaconda3/envs/cpp/lib/libmkl_rt.so 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-4yoQ2c'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/saandeepaath-admin/anaconda3/envs/cpp/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "cmake_utils/find_blas.cmake:358 (check_function_exists)"
+      - "CMakeLists.txt:537 (include)"
+    checks:
+      - "Looking for sgesv_"
+    directories:
+      source: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-rU6VEI"
+      binary: "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-rU6VEI"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "LAPACK_FOUND_C_MANGLED"
+      cached: true
+      stdout: |
+        Change Dir: /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-rU6VEI
+        
+        Run Build Command(s):/home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_266a8/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_266a8.dir/build.make CMakeFiles/cmTC_266a8.dir/build
+        gmake[1]: Entering directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-rU6VEI'
+        Building C object CMakeFiles/cmTC_266a8.dir/CheckFunctionExists.c.o
+        /usr/local/bin/cc   -DCHECK_FUNCTION_EXISTS=sgesv_ -o CMakeFiles/cmTC_266a8.dir/CheckFunctionExists.c.o -c /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-rU6VEI/CheckFunctionExists.c
+        Linking C executable cmTC_266a8
+        /home/saandeepaath-admin/anaconda3/envs/cpp/bin/cmake -E cmake_link_script CMakeFiles/cmTC_266a8.dir/link.txt --verbose=1
+        /usr/local/bin/cc  -DCHECK_FUNCTION_EXISTS=sgesv_ -rdynamic CMakeFiles/cmTC_266a8.dir/CheckFunctionExists.c.o -o cmTC_266a8  -Wl,-rpath,/home/saandeepaath-admin/anaconda3/envs/cpp/lib /home/saandeepaath-admin/anaconda3/envs/cpp/lib/libmkl_rt.so 
+        gmake[1]: Leaving directory '/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/CMakeScratch/TryCompile-rU6VEI'
+        
+      exitCode: 0
+...

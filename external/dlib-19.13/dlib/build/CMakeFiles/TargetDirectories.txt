@@ -1,0 +1,9 @@
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/dlib.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/package.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/package_source.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/edit_cache.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/rebuild_cache.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/list_install_components.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/install.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/install/local.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/dlib/build/CMakeFiles/install/strip.dir

@@ -1,0 +1,17 @@
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/CMakeFiles/package.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/CMakeFiles/package_source.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/CMakeFiles/edit_cache.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/CMakeFiles/rebuild_cache.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/CMakeFiles/list_install_components.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/CMakeFiles/install.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/CMakeFiles/install/local.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/CMakeFiles/install/strip.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/dlib/CMakeFiles/dlib.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/dlib/CMakeFiles/package.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/dlib/CMakeFiles/package_source.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/dlib/CMakeFiles/edit_cache.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/dlib/CMakeFiles/rebuild_cache.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/dlib/CMakeFiles/list_install_components.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/dlib/CMakeFiles/install.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/dlib/CMakeFiles/install/local.dir
+/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/build/dlib/CMakeFiles/install/strip.dir

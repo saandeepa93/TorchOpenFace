@@ -1,0 +1,9 @@
+libdir=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/lib
+includedir=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/dlib-19.13/include
+
+Name: dlib
+Description: Numerical and networking C++ library
+Version: 19.13.0
+Libs: -L${libdir} -ldlib
+Cflags: -I${includedir}
+Requires: libpng
