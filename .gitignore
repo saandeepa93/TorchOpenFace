@@ -108,3 +108,4 @@ lib/local/CppInerop/Debug/
 .vscode
 external/dlib-19.13.tar.bz2
 models
+data

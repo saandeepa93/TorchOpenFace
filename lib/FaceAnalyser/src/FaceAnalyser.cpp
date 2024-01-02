@@ -241,9 +241,9 @@ void FaceAnalyser::PredictStaticAUsAndComputeFeatures(const cv::Mat& frame, cons
 	cv::Mat_<float> params_local;
 	pdm.CalcParams(params_global, params_local, detected_landmarks);
 
-	std::cout<<"PDM LOCAL: "<<params_local.size()<<std::endl;
-	std::cout<<"LANDMARKS: "<<detected_landmarks.size()<<std::endl;
-	std::cout<<"PDM GLOBAL: "<<params_global<<std::endl;
+	// std::cout<<"PDM LOCAL: "<<params_local.size()<<std::endl;
+	// std::cout<<"LANDMARKS: "<<detected_landmarks.size()<<std::endl;
+	// std::cout<<"PDM GLOBAL: "<<params_global<<std::endl;
 
 	// The aligned face requirement for AUs
 	AlignFaceMask(aligned_face_for_au, frame, detected_landmarks, params_global, pdm, triangulation, true, align_scale_au, align_width_au, align_height_au);

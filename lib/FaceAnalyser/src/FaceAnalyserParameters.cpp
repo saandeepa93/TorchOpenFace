@@ -131,7 +131,7 @@ FaceAnalyserParameters::FaceAnalyserParameters(std::vector<std::string> &argumen
 	// First check working directory, then the executable's directory, then the config path set by the build process.
 	fs::path config_path = fs::path(CONFIG_DIR);
 	fs::path model_path = fs::path(this->model_location);
-	std::cout<<"root/model_path: "<<root/model_path<<std::endl;
+	// std::cout<<"root/model_path: "<<root/model_path<<std::endl;
 	
 	if (fs::exists(model_path))
 	{

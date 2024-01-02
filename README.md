@@ -42,4 +42,6 @@ make
 
   * Updated model path
   * Added default constructor to `FaceAnalyser` class
+  * Added default constructor to `Visualizer` class.
+  * Make `SetCameraIntrinsics(float fx, float fy, float cx, float cy)` under `ImageCapture.h` as `public`
   * Added model directory variable to `LandmartDetector` and `FaceAnalyser` classes

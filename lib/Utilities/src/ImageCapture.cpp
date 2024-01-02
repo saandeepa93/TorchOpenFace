@@ -262,7 +262,7 @@ bool ImageCapture::OpenDirectory(std::string directory, std::string bbox_directo
 
 						ss >> min_x >> min_y >> max_x >> max_y;
 
-            std::cout<<"BBOXES: "<<min_x<<min_y<<max_x<<max_y<<std::endl;
+            // std::cout<<"BBOXES: "<<min_x<<min_y<<max_x<<max_y<<std::endl;
 
 						bboxes_image.push_back(cv::Rect_<float>(min_x, min_y, max_x - min_x, max_y - min_y));
 					}

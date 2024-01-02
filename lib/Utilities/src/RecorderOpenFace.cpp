@@ -60,6 +60,7 @@ void CreateDirectory(std::string output_path)
 	}
 }
 
+RecorderOpenFace::RecorderOpenFace(){};
 void RecorderOpenFace::VideoWritingTask(bool is_sequence)
 {
 

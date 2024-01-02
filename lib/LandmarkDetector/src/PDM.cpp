@@ -227,8 +227,8 @@ void PDM::CalcParams(cv::Vec6f& out_params_global, const cv::Rect_<float>& bound
 	tx = tx - scaling * (min_x + max_x)/2.0f;
   ty = ty - scaling * (min_y + max_y)/2.0f;
   
-  std::cout<<"tx: "<<tx<<std::endl;
-  std::cout<<"ty: "<<ty<<std::endl;
+  // std::cout<<"tx: "<<tx<<std::endl;
+  // std::cout<<"ty: "<<ty<<std::endl;
 
 	out_params_global = cv::Vec6f(scaling, rotation[0], rotation[1], rotation[2], tx, ty);
 }
@@ -737,9 +737,9 @@ bool PDM::Read(std::string location)
 	LandmarkDetector::ReadMat(pdmLoc, eigen_values_d);
 	eigen_values_d.convertTo(eigen_values, CV_32F);
 
-	std::cout<<"mean_shape_d: "<<mean_shape_d.size()<<std::endl;
-	std::cout<<"princ_comp_d: "<<princ_comp_d.size()<<std::endl;
-	std::cout<<"eigen_values_d: "<<eigen_values_d.size()<<std::endl;
+	// std::cout<<"mean_shape_d: "<<mean_shape_d.size()<<std::endl;
+	// std::cout<<"princ_comp_d: "<<princ_comp_d.size()<<std::endl;
+	// std::cout<<"eigen_values_d: "<<eigen_values_d.size()<<std::endl;
 
 	return true;
 }

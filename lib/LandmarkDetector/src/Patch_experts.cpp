@@ -450,7 +450,7 @@ bool Patch_experts::Read(std::vector<std::string> intensity_svr_expert_locations
 	// Reading in early termination parameters
 	if (!early_term_loc.empty())
 	{
-		std::cout<<"early_term: "<<early_term_loc.c_str()<<std::endl;
+		// std::cout<<"early_term: "<<early_term_loc.c_str()<<std::endl;
 		std::ifstream earlyTermFile(early_term_loc.c_str(), std::ios_base::in);
 
 		if (!earlyTermFile.is_open())

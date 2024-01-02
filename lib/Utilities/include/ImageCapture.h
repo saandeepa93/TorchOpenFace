@@ -82,7 +82,7 @@ namespace Utilities
 
 		int image_width;
 		int image_height;
-
+		void SetCameraIntrinsics(float fx, float fy, float cx, float cy);
 		float fx, fy, cx, cy;
 
 		// Name of the video file, image directory, or the webcam
@@ -109,7 +109,7 @@ namespace Utilities
 		// Could optionally read the bounding box locations from files (each image could have multiple bounding boxes)
 		std::vector<std::vector<cv::Rect_<float> > > bounding_boxes;
 
-		void SetCameraIntrinsics(float fx, float fy, float cx, float cy);
+		
 
 		bool image_focal_length_set;
 		bool image_optical_center_set;

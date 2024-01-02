@@ -119,7 +119,7 @@ void SVR_static_lin_regressors::Predict(std::vector<double>& predictions, std::v
       // std::cout<<"tmp3: "<<tmp3.size()<<std::endl;
       // std::cout<<"MEANS: "<<this->means<<std::endl;
       // std::cout<<"SUPPORT: "<<this->support_vectors<<std::endl;
-      std::cout<<"BIAS: "<<this->biases<<std::endl;
+      // std::cout<<"BIAS: "<<this->biases<<std::endl;
 		}
 
 		for(cv::MatIterator_<double> pred_it = preds.begin(); pred_it != preds.end(); ++pred_it)
