@@ -19,7 +19,7 @@ img = Image.open("../data/sample.png")
 img = trans(img)
 
 img = img.flip(0)
-img = img.unsqueeze(0).repeat(32, 1, 1, 1)
+img = img.unsqueeze(0).repeat(1, 1, 1, 1)
 
 print(img.size())
 

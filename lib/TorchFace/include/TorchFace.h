@@ -25,6 +25,7 @@ namespace TorchFaceAnalysis{
       void ExtractFeatures(torch::Tensor img);
       cv::Mat TensorToMat(torch::Tensor img);
       bool has_bounding_boxes = false;
+      std::vector<std::string> arguments;
 
       // OpenFace class Members
       Utilities::RecorderOpenFaceParameters recording_params;

@@ -1,6 +1,3 @@
-# **TorchFace**
-
-### This repository is to integrate [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace) with PyTorch C++ frontend. Follow the steps below to setup the repo.
 
 # **Installation**
 
@@ -38,12 +35,8 @@ SET(CMAKE_PREFIX_PATH <PyTorch-install_directory)
 find_package(Torch REQUIRED)
 ```
 
-## **Dlib Installation (credits to [perplexity](https://www.perplexity.ai/)**
- * If you try to run dlib libraries, it throws an error. For this reason, you have to compile dlib from source and additionally install it locally (to remove sudo dependency)
-
-  <!-- * Follow this link to install dlib locally: credits to [perplexity](https://www.perplexity.ai/search/How-to-install-ejY1cIoEQfO_9YGIP0D8Wg?s=c#f290fff8-d03a-45b1-b4d8-649df13719b1) -->
-
-  #### To compile dlib as a shared library using CMake  without sudo, you can follow these steps:
+## **Dlib Installation (credits to [perplexity](https://www.perplexity.ai/))**
+  #### If you try to run dlib libraries, it throws an error. For this reason, you have to compile dlib from source and additionally install it locally (to remove sudo dependency). To compile dlib as a shared library using CMake  without sudo, you can follow these steps:
 
   * Download and extract dlib: You can download the latest version of dlib from the official [website](https://github.com/davisking/dlib)
   
