@@ -317,6 +317,7 @@ bool ImageCapture::OpenDirectory(std::string directory, std::string bbox_directo
 
 void ImageCapture::SetCameraIntrinsics(float fx, float fy, float cx, float cy)
 {
+
 	// If optical centers are not defined just use center of image
 	if (cx == -1)
 	{

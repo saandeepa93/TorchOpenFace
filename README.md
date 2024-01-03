@@ -27,4 +27,10 @@ img = img.unsqueeze(0).repeat(32, 1, 1, 1) // Batch Processing. For now run only
 obj.ExtractFeatures(img) //Call Feature Extraction Method
 ```
 
+## **Sample Output**
+<p align="center">
+  <img src="./imgs/sample.png" height="290" width="290" >
+  <img src="./imgs/sample.jpg" height="290" width="290" >
+</p>
+
 

@@ -14,7 +14,7 @@ obj = torch.classes.TorchFaceAnalysis.TorchFace([model_dir, '-wild', '-mloc', '.
 
 trans = transforms.ToTensor()
 
-
+# img = Image.open("../data/test_1894_aligned.jpg").convert('RGB')
 img = Image.open("../data/sample.png")
 img = trans(img)
 

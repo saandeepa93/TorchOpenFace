@@ -24,6 +24,7 @@ namespace TorchFaceAnalysis{
       TorchFace(std::vector<std::string> arguments);
       void ExtractFeatures(torch::Tensor img);
       cv::Mat TensorToMat(torch::Tensor img);
+      void SetImageParams(cv::Mat img);
       bool has_bounding_boxes = false;
       std::vector<std::string> arguments;
 

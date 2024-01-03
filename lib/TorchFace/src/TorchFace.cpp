@@ -12,6 +12,8 @@ TORCH_LIBRARY(TorchFaceAnalysis, m) {
   
 }
 
+
+// Helper functions
 void print_vec(std::vector<std::string> args){
   for(const std::string& str : args){
     // std::cout<<"Args: "<<str<<std::endl;
@@ -28,6 +30,8 @@ void write_cv_img(cv::Mat img, std::string fname){
   cv::imwrite("../data/" + fname + ".png", img);
 }
 
+
+// Class helper methods
 cv::Mat TorchFace::TensorToMat(torch::Tensor rgb_tensor){
   // contiguos is IMPORTANT 
   rgb_tensor = rgb_tensor.permute({1, 2, 0}).contiguous();
@@ -41,61 +45,70 @@ cv::Mat TorchFace::TensorToMat(torch::Tensor rgb_tensor){
   return mat;
 }
 
+void TorchFace::SetImageParams(cv::Mat latest_frame){
+  this->image_reader.image_height = latest_frame.size().height;
+  this->image_reader.image_width = latest_frame.size().width;
+  this->image_reader.SetCameraIntrinsics(-1, -1, -1, -1);
+
+}
+
+// Class primary methods
 // Constructor
 TorchFace::TorchFace(std::vector<std::string> arguments) {
-  // print_vec(arguments);
-
-  
-  image_reader.SetCameraIntrinsics(-1., -1., -1., -1.);
-  // Load the models if images found
-	// LandmarkDetector::FaceModelParameters det_parameters(arguments);
-	this->det_parameters = LandmarkDetector::FaceModelParameters (arguments);
+  // Set parameters for Face detection models
   this->arguments = arguments;
+	this->det_parameters = LandmarkDetector::FaceModelParameters (arguments);
 
-	// The modules that are being used for tracking
-	std::cout << "Loading the model" << std::endl;
+  // load a face detectors
+  this->classifier = cv::CascadeClassifier(this->det_parameters.haar_face_detector_location);
+	this->face_detector_hog = dlib::get_frontal_face_detector();
+	this->face_detector_mtcnn = LandmarkDetector::FaceDetectorMTCNN (this->det_parameters.mtcnn_face_detector_location);
+
+	// load LM model
   this->face_model = LandmarkDetector::CLNF(det_parameters.model_location);
-  
   if (!face_model.loaded_successfully)
 	{
 		std::cout << "ERROR: Could not load the landmark detector" << std::endl;
 	}
 
-	std::cout << "Model loaded" << std::endl;
+  // Set parameters for Facial Analysis module (AU, Gaze, Headpose etc..)
 	FaceAnalysis::FaceAnalyserParameters face_analysis_params(arguments);
-
   face_analysis_params.OptimizeForImages();
 	this->face_analyser = FaceAnalysis::FaceAnalyser(face_analysis_params);
 
-  // If bounding boxes not provided, use a face detector
-  this->classifier = cv::CascadeClassifier(det_parameters.haar_face_detector_location);
-	this->face_detector_hog = dlib::get_frontal_face_detector();
-	this->face_detector_mtcnn = LandmarkDetector::FaceDetectorMTCNN (det_parameters.mtcnn_face_detector_location);
-
   // A utility for visualizing the results
 	this->visualizer = Utilities::Visualizer (arguments);
-  this->recording_params = Utilities::RecorderOpenFaceParameters (arguments, false, false,
-    image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy);
+  
   
 }
 
 // FaceLandmarkImg executable code
 void TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
 
-  Utilities::RecorderOpenFace open_face_rec("sample",this->recording_params, this->arguments);
   // Batched Tensors
   for (int i = 0; i < rgb_tensors.size(0); i++){
-
+    
+    // Image Tensor
     torch::Tensor rgb_tensor = rgb_tensors[i];
-    // std::cout<<rgb_tensor.sizes()<<std::endl;
-    cv::Mat_<uchar> grayscale_image;
+    // Convert to cv::Mat
     cv::Mat rgb_image = this->TensorToMat(rgb_tensor);
-    this->visualizer.SetImage(rgb_image, image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy);
-
+    // Get Gray image
+    cv::Mat_<uchar> grayscale_image;
     Utilities::ConvertToGrayscale_8bit(rgb_image, grayscale_image);
-    std::vector<cv::Rect_<float> > face_detections;
 
-    // Include feature to provide bbox values
+    // Set Camera Params    
+    this->SetImageParams(rgb_image);
+    // Open Recorder
+    this->recording_params = Utilities::RecorderOpenFaceParameters (this->arguments, false, false,
+                                                                  this->image_reader.fx, this->image_reader.fy, this->image_reader.cx, this->image_reader.cy);
+    Utilities::RecorderOpenFace open_face_rec("sample",this->recording_params, this->arguments);
+    // Open Viz    
+    this->visualizer.SetImage(rgb_image, this->image_reader.fx, this->image_reader.fy, this->image_reader.cx, this->image_reader.cy);
+    
+
+    // Step: Perform Face Detection
+    std::vector<cv::Rect_<float> > face_detections;
+    // Add: Include feature to provide bbox values
     if (has_bounding_boxes)
     {
     }
@@ -118,17 +131,20 @@ void TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
       }
     }
     for (const auto&  vec: face_detections){
-      // std::cout<<"LANDMASRKS: x: "<<vec.x<<"|y: "<<vec.y<<"|width: "<<vec.width<<"|height: "<<vec.height<<std::endl;
+      std::cout<<"BBOX: x: "<<vec.x<<"|y: "<<vec.y<<"|width: "<<vec.width<<"|height: "<<vec.height<<std::endl;
     }
 
+
+    // Step: Perform landmark detection for every face detected
     int face_det = 0;
-    // perform landmark detection for every face detected
     for (size_t face = 0; face < face_detections.size(); ++face)
     {
       // if there are multiple detections go through them
       bool success = LandmarkDetector::DetectLandmarksInImage(rgb_image, face_detections[face], face_model, det_parameters, grayscale_image);
+
       // Estimate head pose and eye gaze				
       cv::Vec6d pose_estimate = LandmarkDetector::GetPose(face_model, image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy);
+      
       // Gaze tracking, absolute gaze direction
       cv::Point3f gaze_direction0(0, 0, -1);
       cv::Point3f gaze_direction1(0, 0, -1);
@@ -144,9 +160,9 @@ void TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
       // Perform AU detection and HOG feature extraction, as this can be expensive only compute it if needed by output or visualization
       cv::Mat sim_warped_img;
       cv::Mat_<double> hog_descriptor; int num_hog_rows = 0, num_hog_cols = 0;
-      face_analyser.PredictStaticAUsAndComputeFeatures(rgb_image, face_model.detected_landmarks);
-      face_analyser.GetLatestAlignedFace(sim_warped_img);
-      face_analyser.GetLatestHOG(hog_descriptor, num_hog_rows, num_hog_cols);
+      this->face_analyser.PredictStaticAUsAndComputeFeatures(rgb_image, face_model.detected_landmarks);
+      this->face_analyser.GetLatestAlignedFace(sim_warped_img);
+      this->face_analyser.GetLatestHOG(hog_descriptor, num_hog_rows, num_hog_cols);
 
       // Displaying the tracking visualizations
 			this->visualizer.SetObservationFaceAlign(sim_warped_img);
@@ -159,7 +175,7 @@ void TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
 
       // write_cv_img(sim_warped_img, "warped");
       open_face_rec.SetObservationHOG(face_model.detection_success, hog_descriptor, num_hog_rows, num_hog_cols, 31); // The number of channels in HOG is fixed at the moment, as using FHOG
-			open_face_rec.SetObservationActionUnits(face_analyser.GetCurrentAUsReg(), face_analyser.GetCurrentAUsClass());
+			open_face_rec.SetObservationActionUnits(this->face_analyser.GetCurrentAUsReg(), this->face_analyser.GetCurrentAUsClass());
 			open_face_rec.SetObservationLandmarks(face_model.detected_landmarks, face_model.GetShape(image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy),
 				face_model.params_global, face_model.params_local, face_model.detection_certainty, face_model.detection_success);
 			open_face_rec.SetObservationPose(pose_estimate);

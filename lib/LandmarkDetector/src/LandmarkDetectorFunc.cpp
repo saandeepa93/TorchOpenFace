@@ -57,11 +57,13 @@ cv::Vec6f LandmarkDetector::GetPose(const CLNF& clnf_model, float fx, float fy, 
 {
 	if (!clnf_model.detected_landmarks.empty() && clnf_model.params_global[0] != 0)
 	{
+
 		// This is used as an initial estimate for the iterative PnP algorithm
 		float Z = fx / clnf_model.params_global[0];
 
 		float X = ((clnf_model.params_global[4] - cx) * (1.0 / fx)) * Z;
 		float Y = ((clnf_model.params_global[5] - cy) * (1.0 / fy)) * Z;
+
 
 		// Correction for orientation
 
