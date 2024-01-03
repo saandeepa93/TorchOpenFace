@@ -38,17 +38,54 @@ SET(CMAKE_PREFIX_PATH <PyTorch-install_directory)
 find_package(Torch REQUIRED)
 ```
 
-## **Dlib Installation**
+## **Dlib Installation (credits to [perplexity](https://www.perplexity.ai/)**
  * If you try to run dlib libraries, it throws an error. For this reason, you have to compile dlib from source and additionally install it locally (to remove sudo dependency)
 
-  * Follow this link to install dlib locally: credits to [perplexity](https://www.perplexity.ai/search/How-to-install-ejY1cIoEQfO_9YGIP0D8Wg?s=c#f290fff8-d03a-45b1-b4d8-649df13719b1)
+  <!-- * Follow this link to install dlib locally: credits to [perplexity](https://www.perplexity.ai/search/How-to-install-ejY1cIoEQfO_9YGIP0D8Wg?s=c#f290fff8-d03a-45b1-b4d8-649df13719b1) -->
 
+  #### To compile dlib as a shared library using CMake  without sudo, you can follow these steps:
+
+  * Download and extract dlib: You can download the latest version of dlib from the official [website](https://github.com/davisking/dlib)
+  
   * Before running cmake, add the below line to `CMakeLists.txt` of dlib build file on top.
   ```
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
   ```
 
-  * Next, edit the `CMakeLists.txt` in the project as follows
+  * After downloading, extract the files to a directory.
+  Create a build directory: Navigate to the dlibdirectory and create a new directory named build:
+
+  ```
+  cd dlib
+  mkdir build
+  cd build
+  ```
+
+  * Run CMake with the -DBUILD_SHARED_LIBS=1 option: This option tells CMake to build dlib as a shared library. Run the following command:
+
+  ```
+  cmake -DBUILD_SHARED_LIBS=1 ..
+  ```
+
+  * Compile dlib: After running CMake, compile dlib using the make command:
+  ```
+  make
+  ```
+
+  * Install dlib locally: Instead of using `sudo make install` which installs dlib system-wide, you can install dlib locally in a directory of your choice. For example, if you want to install dlib in a directory named local_install in your home directory, you can do so with the following commands: 
+  This will install dlib in ~/local_install/usr/local/lib and ~/local_install/usr/local/include2
+
+  ```
+  make install DESTDIR=~/local_install
+  ```
+
+  * To use the shared library in another project, you need to tell the linker where to find it. You can do this by adding the path to the library to the `LD_LIBRARY_PATH` environment variable:
+
+  ```
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/local_install/usr/local/lib
+  ```
+
+  * Next, edit the `CMakeLists.txt` in the main project as follows
   ```
   find_package(dlib 19.13 REQUIRED PATHS "<path-installed>/usr/local/lib/cmake/dlib" NO_DEFAULT_PATH)
   ```
