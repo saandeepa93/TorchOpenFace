@@ -18,8 +18,10 @@ target_include_directories(TorchFace PUBLIC include/)
 target_include_directories(TorchFace PUBLIC ${OpenCV_INCLUDE_DIRS})
 MESSAGE("OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS}")
 MESSAGE("TORCH_LIBRARIES: ${TORCH_LIBRARIES}")
+MESSAGE("OpenCV_LIBS: ${OpenCV_LIBS}")
 
 # Link Torchlibs
+target_link_libraries(TorchFace ${OpenCV_LIBS})
 target_link_libraries(TorchFace ${TORCH_LIBRARIES})
 # Link other external
 target_link_libraries(TorchFace LandmarkDetector)

@@ -1,5 +1,6 @@
 import torch 
 from torchvision import transforms 
+from torchvision.utils import save_image
 from PIL import Image
 import os 
 import time
@@ -14,15 +15,18 @@ obj = torch.classes.TorchFaceAnalysis.TorchFace([model_dir, '-wild', '-mloc', '.
 
 trans = transforms.ToTensor()
 
-# img = Image.open("../data/test_1894_aligned.jpg").convert('RGB')
-img = Image.open("../data/sample.png")
+img = Image.open("../data/test_1894_aligned.jpg").convert('RGB')
+# img = Image.open("../data/sample.png")
 img = trans(img)
 
 img = img.flip(0)
-img = img.unsqueeze(0).repeat(1, 1, 1, 1)
+img = img.unsqueeze(0).repeat(32, 1, 1, 1)
 
 print(img.size())
 
 start = time.time()
-obj.ExtractFeatures(img)
+aus = obj.ExtractFeatures(img)
+# save_image(aus, '../data/img1.png')
 print(f"Total: {time.time() - start}")
+print(aus.size())
+print(type(aus))

@@ -109,3 +109,5 @@ lib/local/CppInerop/Debug/
 external/dlib-19.13.tar.bz2
 models
 data
+external
+wiki.md

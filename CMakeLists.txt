@@ -17,7 +17,9 @@ else()
 endif()
 
 # OpenCV
-find_package( OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect)
+# find_package( OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect)
+find_package( OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect
+PATHS "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/usr/local/lib/cmake/dlib" NO_DEFAULT_PATH)
 
 # BOOST
 find_package( Boost 1.5.9 COMPONENTS filesystem system)

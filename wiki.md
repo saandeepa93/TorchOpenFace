@@ -86,10 +86,15 @@ find_package(Torch REQUIRED)
 ## **TorchFace Installation**
 * Follow the usual build process to generate `libTorchFace.so` library under `/build/lib/TorchFace/` directory
 ```
+cd TorchFace
 mkdir build
+cd build
 cmake ..
 make
 ```
 
+
+ cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external -D BUILD_TIFF=ON -D WITH_TBB=ON -D BUILD_SHARED_LIBS=ON \
+-D OPENCV_EXTRA_MODULES_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/opencv_shared/ ..
 
 
