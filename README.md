@@ -71,8 +71,8 @@ TorchFace/
 
 ## **Sample Output**
 <p align="center">
-  <img src="https://github.com/saandeepa93/TorchOpenFace/tree/master/imgs/sample.png" height="290" width="290" >
-  <img src="https://github.com/saandeepa93/TorchOpenFace/tree/master/imgs/sample.jpg" height="290" width="290" >
+  <img src="./imgs/sample.png" height="290" width="290" >
+  <img src="./imgs/sample.jpg" height="290" width="290" >
 </p>
 
 
