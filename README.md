@@ -13,18 +13,60 @@ torch.classes.load_library(lib_path)
 obj = torch.classes.TorchFaceAnalysis.TorchFace([model_root_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt'])
 ```
 
-## **Feature Extraction**
+## **FaceLandmarkImg Executable**
 ```
 import torch 
 from torchvision import transforms 
+from torchvision.utils import save_image
 from PIL import Image
+import os 
+import time
 
-img = Image.open("../data/sample.png")
+root_dir = "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3"
+model_dir = os.path.join(root_dir, "models")
+lib_path = os.path.join(root_dir, "./build/lib/TorchFace/libTorchFace.so")
+torch.classes.load_library(lib_path)
+
+
+obj = torch.classes.TorchFaceAnalysis.TorchFace([model_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt']) # C++ class Object Creation
+
+trans = transforms.ToTensor()
+img = Image.open("../data/test_1894_aligned.jpg").convert('RGB')
 img = trans(img)
-img = img.flip(0) // Convert to BGR
-img = img.unsqueeze(0).repeat(32, 1, 1, 1) // Batch Processing. For now run only for loop
+img = img.flip(0) # RGB->BGR. Can do in C++ as well.
+img = img.unsqueeze(0).repeat(32, 1, 1, 1) # Sample Batch 
+obj.ExtractFeatures(img) # Class Method Call
+```
 
-obj.ExtractFeatures(img) //Call Feature Extraction Method
+## **Directory Structure**
+
+The primary library which binds OpenFace pure C++ with PyTorch C++ in present under `lib/TorchFace`
+The rest of the directories under `lib` are from [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/tree/master/lib/local) original repo. 
+
+```
+TorchFace/
+├── cmake
+├── exe
+├── imgs
+├── external
+└── lib
+    ├── CppInerop
+    ├── FaceAnalyser
+    │   ├── include
+    │   └── src
+    ├── GazeAnalyser
+    │   ├── include
+    │   └── src
+    ├── LandmarkDetector
+    │   ├── include
+    │   └── src
+    ├── **TorchFace**
+    │   ├── include
+    │   └── src
+    └── Utilities
+        ├── include
+        └── src
+
 ```
 
 ## **Sample Output**
