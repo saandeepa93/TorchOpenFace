@@ -32,32 +32,23 @@ void write_cv_img(cv::Mat img, std::string fname){
 }
 
 cv::Mat TensorToMat(torch::Tensor rgb_tensor){
-  // contiguos is IMPORTANT 
   rgb_tensor = rgb_tensor.permute({1, 2, 0}).contiguous();
-  // Scale the tensor values to the range [0, 255] and convert it to 8-bit unsigned integer
   rgb_tensor = rgb_tensor.mul(255).clamp(0, 255).to(torch::kU8);
-  // Actual Conversion
   cv::Mat rgb_mat = cv::Mat(rgb_tensor.size(0), rgb_tensor.size(1), CV_8UC3, rgb_tensor.data_ptr());
-  // Return Clone
-  return rgb_mat;
+  return rgb_mat.clone();
 
 }
 
 torch::Tensor MatToTensor(std::vector<cv::Mat> mats){
   std::vector<torch::Tensor> batched_warped_tensors;
   for(const cv::Mat& mat: mats){
-    cv::cvtColor(mat, mat, cv::COLOR_BGR2RGB);
-    cv::Mat matFloat;
-    mat.convertTo(matFloat, CV_32F, 1.0 / 255);
-    auto size = matFloat.size();
-    auto nChannels = matFloat.channels();
-    auto tensor = torch::from_blob(matFloat.data, {size.height, size.width, nChannels});
+    torch::Tensor tensor = torch::from_blob(mat.data, { mat.rows, mat.cols, 3 }, at::kByte);
+    tensor = tensor.to(at::kFloat);
     batched_warped_tensors.push_back(tensor.permute({2, 0, 1}));
   }
   torch::Tensor batchedTensor = torch::stack(batched_warped_tensors);
   return batchedTensor;
 }
-
 
 
 // Class helper methods
@@ -99,7 +90,7 @@ TorchFace::TorchFace(std::vector<std::string> arguments) {
 }
 
 // Face detect and LM
-std::vector<cv::Rect_<float> >  TorchFace::FaceDetectionAndLM(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image){
+std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image){
   // Step: Perform Face Detection
   std::vector<cv::Rect_<float> > face_detections;
   // Add: Include feature to provide bbox values
@@ -148,30 +139,7 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
     
 
     // Step: Perform Face Detection
-    std::vector<cv::Rect_<float> > face_detections = this->FaceDetectionAndLM(grayscale_image, rgb_image);
-
-    // // Add: Include feature to provide bbox values
-    // if (has_bounding_boxes)
-    // {
-    // }
-    // else
-    // {
-    //   if (this->det_parameters.curr_face_detector == LandmarkDetector::FaceModelParameters::HOG_SVM_DETECTOR)
-    //   {
-    //     std::vector<float> confidences;
-    //     LandmarkDetector::DetectFacesHOG(face_detections, grayscale_image, face_detector_hog, confidences);
-    //   }
-    //   else if (this->det_parameters.curr_face_detector == LandmarkDetector::FaceModelParameters::HAAR_DETECTOR)
-    //   {
-    //     LandmarkDetector::DetectFaces(face_detections, grayscale_image, this->classifier);
-    //   }
-    //   else
-    //   {
-    //     std::vector<float> confidences;
-    //     // std::cout<<"IMAGE SIZE: "<<rgb_image.size()<<std::endl;
-    //     LandmarkDetector::DetectFacesMTCNN(face_detections, rgb_image, this->face_detector_mtcnn, confidences);
-    //   }
-    // }
+    std::vector<cv::Rect_<float> > face_detections = this->FaceDetection(grayscale_image, rgb_image);
 
 
     // Step: Perform landmark detection for every face detected
@@ -203,6 +171,8 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
       this->face_analyser.GetLatestHOG(hog_descriptor, num_hog_rows, num_hog_cols);
       batch_sim_warped_img.push_back(sim_warped_img);
 
+
+
       // Displaying the tracking visualizations
 			this->visualizer.SetObservationFaceAlign(sim_warped_img);
 			this->visualizer.SetObservationHOG(hog_descriptor, num_hog_rows, num_hog_cols);
@@ -222,7 +192,6 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
 			open_face_rec.SetObservationFaceAlign(sim_warped_img);
 			open_face_rec.SetObservationFaceID(face);
 			open_face_rec.WriteObservation();
-
 
     }
 

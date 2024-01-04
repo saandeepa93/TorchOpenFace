@@ -18,8 +18,12 @@ endif()
 
 # OpenCV
 # find_package( OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect)
+
+set(OpenCV_DIR "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/lib/cmake/opencv4/")
 find_package( OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect
-PATHS "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/usr/local/lib/cmake/dlib" NO_DEFAULT_PATH)
+          PATHS "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/lib/cmake/opencv4/" NO_DEFAULT_PATH )
+MESSAGE("OpenCV FOUND IN ${OpenCV_DIR}")
+
 
 # BOOST
 find_package( Boost 1.5.9 COMPONENTS filesystem system)
@@ -34,7 +38,7 @@ if ( ${dlib_FOUND} )
 endif()
 
 # LibTorch
-SET(CMAKE_PREFIX_PATH /home/saandeepaath-admin/projects/learning/cpp_cmake/example2/pytorch)
+SET(CMAKE_PREFIX_PATH /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/pytorch)
 find_package(Torch REQUIRED)
 
 

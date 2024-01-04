@@ -25,8 +25,7 @@ namespace TorchFaceAnalysis{
       TorchFace(std::vector<std::string> arguments);
       torch::Tensor  ExtractFeatures(torch::Tensor img);
       void SetImageParams(cv::Mat img);
-
-      std::vector<cv::Rect_<float> > FaceDetectionAndLM(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image);
+      std::vector<cv::Rect_<float> > FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image);
 
       bool has_bounding_boxes = false;
       std::vector<std::string> arguments;

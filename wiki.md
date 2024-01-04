@@ -83,6 +83,46 @@ find_package(Torch REQUIRED)
   find_package(dlib 19.13 REQUIRED PATHS "<path-installed>/usr/local/lib/cmake/dlib" NO_DEFAULT_PATH)
   ```
 
+## **OpenCV Installation**
+  * Go to the OpenCV releases page and download the source code for OpenCV 4.1.
+  ```
+  wget https://github.com/opencv/opencv/archive/4.1.0.zip
+  unzip 4.1.0.zip
+  cd opencv-4.1.0
+  mkdir build
+  cd build
+  ```
+
+  * Run CMAKE 
+  ```
+  cmake -D CMAKE_BUILD_TYPE=RELEASE \
+  -D CMAKE_INSTALL_PREFIX=<your-install-dir> \
+  -D BUILD_EXAMPLES=OFF \
+  -D BUILD_TESTS=OFF \
+  -D WITH_CUDA=OFF \
+  ..
+  ```
+
+  * Compile and install
+  ```
+  make -j8 && make install
+  ```
+
+  * Configure Your Environment:
+  ```
+  export LD_LIBRARY_PATH=/home/username/local/lib:$LD_LIBRARY_PATH
+  export PKG_CONFIG_PATH=/home/username/local/lib/pkgconfig:$PKG_CONFIG_PATH
+  ```
+
+  * In your CMakeLists.txt, find OpenCV using the following line
+  ```
+  find_package( OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect
+          PATHS "<<your-install-dir>>/lib/cmake/opencv4/" NO_DEFAULT_PATH )
+  ```
+
+
+
+
 ## **TorchFace Installation**
 * Follow the usual build process to generate `libTorchFace.so` library under `/build/lib/TorchFace/` directory
 ```
@@ -93,6 +133,15 @@ cmake ..
 make
 ```
 
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX='/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external' \
+-D BUILD_EXAMPLES=OFF \
+-D BUILD_TESTS=OFF \
+-D WITH_CUDA=OFF \
+..
+
+export LD_LIBRARY_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/lib:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/lib/pkgconfig:$PKG_CONFIG_PATH
 
  cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external -D BUILD_TIFF=ON -D WITH_TBB=ON -D BUILD_SHARED_LIBS=ON \
 -D OPENCV_EXTRA_MODULES_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/opencv_shared/ ..
