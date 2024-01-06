@@ -5,7 +5,7 @@ project(ex3)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 # OpenBLAS
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 find_package(OpenBLAS REQUIRED)
@@ -54,4 +54,4 @@ add_subdirectory(lib/Utilities)
 add_subdirectory(lib/TorchFace)
 
 # EXE
-add_subdirectory(exe)
+# add_subdirectory(exe)

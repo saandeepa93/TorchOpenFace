@@ -1,5 +1,6 @@
 #include "TorchFace.h"
 #include <opencv2/dnn.hpp>
+#include <ATen/core/Dict.h>
 
 
 using namespace TorchFaceAnalysis;
@@ -47,6 +48,7 @@ torch::Tensor MatToTensor(std::vector<cv::Mat> mats){
     batched_warped_tensors.push_back(tensor.permute({2, 0, 1}));
   }
   torch::Tensor batchedTensor = torch::stack(batched_warped_tensors);
+  batchedTensor = batchedTensor.flip(1);
   return batchedTensor;
 }
 
@@ -62,6 +64,7 @@ void TorchFace::SetImageParams(cv::Mat latest_frame){
 // Class primary methods
 // Constructor
 TorchFace::TorchFace(std::vector<std::string> arguments) {
+
   // Set parameters for Face detection models
   this->arguments = arguments;
 	this->det_parameters = LandmarkDetector::FaceModelParameters (arguments);
@@ -85,18 +88,31 @@ TorchFace::TorchFace(std::vector<std::string> arguments) {
 
   // A utility for visualizing the results
 	this->visualizer = Utilities::Visualizer (arguments);
-  
-  
 }
 
-// Face detect and LM
-std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image){
+// Face detect 
+std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image, \
+      const  c10::Dict<std::string, c10::IValue>& misc_args){
   // Step: Perform Face Detection
   std::vector<cv::Rect_<float> > face_detections;
+
   // Add: Include feature to provide bbox values
-  if (has_bounding_boxes)
+  if (misc_args.contains("bbox"))
   {
+    c10::IValue bbox = misc_args.at("bbox");
+    if (!bbox.isList()) {
+        throw std::runtime_error("IValue is not a list");
+    }
+    std::vector<c10::IValue> elements = bbox.toList().vec();
+    float x = elements[0].toDouble();
+    float y = elements[1].toDouble();
+    float width = elements[2].toDouble() - elements[0].toDouble();
+    float height = elements[3].toDouble() - elements[1].toDouble();
+    cv::Rect_<float> rect(x, y, width, height);
+    // Now you can push it back into the vector
+    face_detections.push_back(rect);
   }
+  // Perform Face Detections
   else
   {
     if (this->det_parameters.curr_face_detector == LandmarkDetector::FaceModelParameters::HOG_SVM_DETECTOR)
@@ -111,7 +127,6 @@ std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& g
     else
     {
       std::vector<float> confidences;
-      // std::cout<<"IMAGE SIZE: "<<rgb_image.size()<<std::endl;
       LandmarkDetector::DetectFacesMTCNN(face_detections, rgb_image, this->face_detector_mtcnn, confidences);
     }
   }
@@ -119,8 +134,9 @@ std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& g
 }
 
 // FaceLandmarkImg executable code
-torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
+torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<std::string, c10::IValue> misc_args){
 
+  rgb_tensors = rgb_tensors.flip(1);
   std::vector<cv::Mat> batch_sim_warped_img;
 
   for (int i = 0; i < rgb_tensors.size(0); ++i){
@@ -139,8 +155,7 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
     
 
     // Step: Perform Face Detection
-    std::vector<cv::Rect_<float> > face_detections = this->FaceDetection(grayscale_image, rgb_image);
-
+    std::vector<cv::Rect_<float> > face_detections = this->FaceDetection(grayscale_image, rgb_image, misc_args);
 
     // Step: Perform landmark detection for every face detected
     int face_det = 0;
@@ -202,7 +217,6 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors){
 
 
   }
-
   torch::Tensor warped_tensor = MatToTensor(batch_sim_warped_img);
   return warped_tensor;
 

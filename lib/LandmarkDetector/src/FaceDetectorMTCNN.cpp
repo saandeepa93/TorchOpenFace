@@ -656,6 +656,11 @@ bool FaceDetectorMTCNN::DetectFaces(std::vector<cv::Rect_<float> >& o_regions, c
 
 	cv::Mat img_float;
 	input_img.convertTo(img_float, CV_32FC3);
+	
+	std::cout<<"num_scales: "<<num_scales<<std::endl;
+	std::cout<<"min_face_size: "<<min_face_size<<std::endl;
+	std::cout<<"height_orig: "<<height_orig<<std::endl;
+	std::cout<<"width_orig: "<<width_orig<<std::endl;
 
 	std::vector<cv::Rect_<float> > proposal_boxes_all;
 	std::vector<float> scores_all;
@@ -665,7 +670,7 @@ bool FaceDetectorMTCNN::DetectFaces(std::vector<cv::Rect_<float> >& o_regions, c
 	std::vector<std::vector<cv::Rect_<float> > > proposal_boxes_cross_scale(num_scales);
 	std::vector<std::vector<float> > scores_cross_scale(num_scales);
 	std::vector<std::vector<cv::Rect_<float> > > proposal_corrections_cross_scale(num_scales);
-
+	
 	for (int i = 0; i < num_scales; ++i)
 	{
 		double scale = ((double)face_support / (double)min_face_size)*cv::pow(pyramid_factor, i);
@@ -729,6 +734,7 @@ bool FaceDetectorMTCNN::DetectFaces(std::vector<cv::Rect_<float> >& o_regions, c
 
 	// Creating proposal images from previous step detections
 	std::vector<bool> above_thresh;
+	
 	above_thresh.resize(proposal_boxes_all.size(), false);
 
 	for (size_t k = 0; k < proposal_boxes_all.size(); ++k) 
