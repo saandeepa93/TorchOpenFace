@@ -14,6 +14,8 @@ obj = torch.classes.TorchFaceAnalysis.TorchFace([model_root_dir, '-wild', '-mloc
 ```
 
 ## **FaceLandmarkImg Executable**
+
+### **Individual images**
 ```
 import torch 
 from torchvision import transforms 
@@ -35,7 +37,33 @@ img = Image.open("../data/test_1894_aligned.jpg").convert('RGB')
 img = trans(img)
 img = img.flip(0) # RGB->BGR. Can do in C++ as well.
 img = img.unsqueeze(0).repeat(32, 1, 1, 1) # Sample Batch 
-obj.ExtractFeatures(img) # Class Method Call
+misc_args = {
+  "bbox": [0., 0., 112., 112.]
+}
+
+obj.ExtractFeatures(img, misc_args) # Class Method Call
+```
+
+### **Using DataLoader**
+```
+  # LOAD CONFIGURATION
+  cfg = get_cfg_defaults()
+  cfg.merge_from_file(config_path)
+  
+  torch.classes.load_library("<dir>/libTorchFace.so")
+  obj = torch.classes.TorchFaceAnalysis.TorchFace([model_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt'])
+  
+  test_set = RafDb(cfg, "val", transform, transform)
+  test_loader = DataLoader(test_set, batch_size=cfg.TRAINING.BATCH, shuffle=False, num_workers = cfg.DATASET.NUM_WORKERS)
+  
+  # BBOX (0, 0, max, max) since RAF-DB images are already aligned!
+  misc_args = {
+    "bbox":[0., 0., float(cfg.DATASET.IMG_SIZE), float(cfg.DATASET.IMG_SIZE)]
+  }
+
+  for b, (img, _) in enumerate(tqdm(test_loader)):
+    obj.ExtractFeatures(img.cpu().detach(), misc_args)
+    e()
 ```
 
 ## **Directory Structure**
