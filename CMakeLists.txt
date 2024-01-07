@@ -8,10 +8,12 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 # OpenBLAS
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
-find_package(OpenBLAS REQUIRED)
+# find_package(OpenBLAS REQUIRED)
+find_package(OpenBLAS REQUIRED PATHS "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/OpenBLAS/lib/cmake/openblas" NO_DEFAULT_PATH)
 if ( ${OpenBLAS_FOUND} )
     MESSAGE("OpenBLAS information:")
-    MESSAGE("  OpenBLAS_LIBRARIES: ${OpenBLAS_LIB}")
+    MESSAGE("  OpenBLAS_LIBRARIES: ${OpenBLAS_LIBRARIES}")
+    MESSAGE("OpenBLAS FOUND IN ${OpenBLAS_DIR}")
 else()
     MESSAGE(FATAL_ERROR "OpenBLAS not found in the system.")
 endif()
@@ -38,7 +40,7 @@ if ( ${dlib_FOUND} )
 endif()
 
 # LibTorch
-SET(CMAKE_PREFIX_PATH /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/pytorch)
+SET(CMAKE_PREFIX_PATH /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/pytorch)
 find_package(Torch REQUIRED)
 
 

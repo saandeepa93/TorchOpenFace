@@ -110,8 +110,8 @@ find_package(Torch REQUIRED)
 
   * Configure Your Environment:
   ```
-  export LD_LIBRARY_PATH=/home/username/local/lib:$LD_LIBRARY_PATH
-  export PKG_CONFIG_PATH=/home/username/local/lib/pkgconfig:$PKG_CONFIG_PATH
+  export LD_LIBRARY_PATH=<your-install-dir>/lib:$LD_LIBRARY_PATH
+  export PKG_CONFIG_PATH=<your-install-dir>/lib/pkgconfig:$PKG_CONFIG_PATH
   ```
 
   * In your CMakeLists.txt, find OpenCV using the following line
@@ -121,6 +121,29 @@ find_package(Torch REQUIRED)
   ```
 
 
+## **OpenBLAS Installation**
+
+* Build OpenBLAS from source.
+```
+# download the OpenBLAS source
+git clone https://github.com/xianyi/OpenBLAS
+
+# compile the library
+cd OpenBLAS && make FC=gfortran
+
+# install the library
+make PREFIX=<your-install-dir> install
+```
+
+* Update system path information
+```
+export LD_LIBRARY_PATH=<your-install-dir>/lib/:$LD_LIBRARY_PATH
+```
+
+  * In your CMakeLists.txt, find OpenCV using the following line
+  ```
+  find_package(OpenBLAS REQUIRED PATHS "<your-install-dir>/lib/cmake/openblas" NO_DEFAULT_PATH)
+  ```
 
 
 ## **TorchFace Installation**
@@ -146,4 +169,6 @@ export PKG_CONFIG_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/exam
  cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external -D BUILD_TIFF=ON -D WITH_TBB=ON -D BUILD_SHARED_LIBS=ON \
 -D OPENCV_EXTRA_MODULES_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/opencv_shared/ ..
 
+
+export LD_LIBRARY_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/OpenBLAS/lib/:$LD_LIBRARY_PATH
 

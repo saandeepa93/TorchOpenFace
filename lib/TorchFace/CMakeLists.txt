@@ -23,6 +23,7 @@ MESSAGE("OpenCV_LIBS: ${OpenCV_LIBS}")
 # Link Torchlibs
 target_link_libraries(TorchFace ${OpenCV_LIBS})
 target_link_libraries(TorchFace ${TORCH_LIBRARIES})
+target_link_libraries(TorchFace ${OpenBLAS_LIBRARIES})
 # Link other external
 target_link_libraries(TorchFace LandmarkDetector)
 target_link_libraries(TorchFace FaceAnalyser)
