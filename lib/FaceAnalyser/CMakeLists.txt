@@ -38,7 +38,8 @@ target_include_directories(FaceAnalyser PRIVATE ${FACEANALYSER_SOURCE_DIR}/inclu
 MESSAGE("FACEANALYSER_SOURCE_DIR: ${FACEANALYSER_SOURCE_DIR}")
 target_include_directories(FaceAnalyser PUBLIC ${OpenCV_INCLUDE_DIRS})
 
-target_link_libraries(FaceAnalyser PUBLIC ${OpenCV_LIBS} ${OpenBLAS_LIB})
+# target_link_libraries(FaceAnalyser PUBLIC ${OpenCV_LIBS} ${OpenBLAS_LIB})
+target_link_libraries(FaceAnalyser PUBLIC ${OpenCV_LIBS} ${OpenBLAS_LIBRARIES})
 target_link_libraries(FaceAnalyser PUBLIC dlib::dlib)
 
 if(${Boost_FOUND})

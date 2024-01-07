@@ -25,11 +25,11 @@ namespace TorchFaceAnalysis{
 
   class TorchFace:public torch::CustomClassHolder {
     public:
-      TorchFace(std::vector<std::string> arguments);
-      torch::Tensor  ExtractFeatures(torch::Tensor img, c10::Dict<std::string, c10::IValue> misc_args);
+      TorchFace(std::vector<std::string> arguments, c10::Dict<std::string, c10::IValue> misc_args);
+      torch::Tensor  ExtractFeatures(torch::Tensor img, c10::Dict<std::string, c10::IValue> ex_args);
       void SetImageParams(cv::Mat img);
       std::vector<cv::Rect_<float> > FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image, \
-            const  c10::Dict<std::string, c10::IValue>& misc_args);
+            const  c10::Dict<std::string, c10::IValue>& ex_args);
 
       bool has_bounding_boxes = false;
       std::vector<std::string> arguments;

@@ -8,7 +8,7 @@ using namespace TorchFaceAnalysis;
 // C++ -> Torch Bindings
 TORCH_LIBRARY(TorchFaceAnalysis, m) {
   m.class_<TorchFaceAnalysis::TorchFace>("TorchFace")
-    .def(torch::init<std::vector<std::string>>())
+    .def(torch::init<std::vector<std::string>, c10::Dict<std::string, c10::IValue>>())
     .def("ExtractFeatures", &TorchFace::ExtractFeatures)
     ;
   
@@ -63,7 +63,7 @@ void TorchFace::SetImageParams(cv::Mat latest_frame){
 
 // Class primary methods
 // Constructor
-TorchFace::TorchFace(std::vector<std::string> arguments) {
+TorchFace::TorchFace(std::vector<std::string> arguments, c10::Dict<std::string, c10::IValue> misc_args) {
 
   // Set parameters for Face detection models
   this->arguments = arguments;
@@ -86,20 +86,21 @@ TorchFace::TorchFace(std::vector<std::string> arguments) {
   face_analysis_params.OptimizeForImages();
 	this->face_analyser = FaceAnalysis::FaceAnalyser(face_analysis_params);
 
+
   // A utility for visualizing the results
-	this->visualizer = Utilities::Visualizer (arguments);
+  this->visualizer = Utilities::Visualizer (arguments);
 }
 
 // Face detect 
 std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image, \
-      const  c10::Dict<std::string, c10::IValue>& misc_args){
+      const c10::Dict<std::string, c10::IValue>& ex_args){
   // Step: Perform Face Detection
   std::vector<cv::Rect_<float> > face_detections;
 
   // Add: Include feature to provide bbox values
-  if (misc_args.contains("bbox"))
+  if (ex_args.contains("bbox"))
   {
-    c10::IValue bbox = misc_args.at("bbox");
+    c10::IValue bbox = ex_args.at("bbox");
     if (!bbox.isList()) {
         throw std::runtime_error("IValue is not a list");
     }
@@ -134,7 +135,7 @@ std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& g
 }
 
 // FaceLandmarkImg executable code
-torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<std::string, c10::IValue> misc_args){
+torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<std::string, c10::IValue> ex_args){
 
   rgb_tensors = rgb_tensors.flip(1);
   std::vector<cv::Mat> batch_sim_warped_img;
@@ -155,7 +156,7 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<st
     
 
     // Step: Perform Face Detection
-    std::vector<cv::Rect_<float> > face_detections = this->FaceDetection(grayscale_image, rgb_image, misc_args);
+    std::vector<cv::Rect_<float> > face_detections = this->FaceDetection(grayscale_image, rgb_image, ex_args);
 
     // Step: Perform landmark detection for every face detected
     int face_det = 0;

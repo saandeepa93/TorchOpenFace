@@ -120,6 +120,11 @@ find_package(Torch REQUIRED)
           PATHS "<<your-install-dir>>/lib/cmake/opencv4/" NO_DEFAULT_PATH )
   ```
 
+  * Link the libraries
+  ```
+  target_link_libraries(TorchFace ${OpenBLAS_LIBRARIES})
+  ```
+
 
 ## **OpenBLAS Installation**
 
