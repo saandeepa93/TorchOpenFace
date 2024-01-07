@@ -106,9 +106,18 @@ lib/local/CppInerop/Debug/
 # IDE-generated folders
 .idea
 .vscode
-external/dlib-19.13.tar.bz2
+external
+!external/usr
+!external/lib
+!external/OpenBLAS/lib
+external/pytorch
+external/OpenBLAS/OpenBLAS
+external/bin
+external/dlib-19.13
+external/include
+external/opencv-4.1.0
+external/opencv_shared
+external/share
 models
 data
-external/
-!external/OpenBLAS/
 wiki.md

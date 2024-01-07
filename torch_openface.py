@@ -12,8 +12,8 @@ torch.classes.load_library(lib_path)
 
 openface_args = [model_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt']
 misc_args = {
-  'vis': True, 
-  'record': True
+  "vis": True, 
+  "rec": True
 }
 obj = torch.classes.TorchFaceAnalysis.TorchFace([model_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt'], misc_args)
 
@@ -25,7 +25,7 @@ img = img.unsqueeze(0).repeat(1, 1, 1, 1) # Sample Batch
 ex_args = {
   # "bbox": [204., 136., 326., 283.], 
   # "bbox": [734., 450., 1830., 2144.], 
-  "vis": True
+  "fname": "saandeep"
 }
 
 start = time.time()

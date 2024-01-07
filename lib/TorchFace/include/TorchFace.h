@@ -21,18 +21,21 @@
 #include <RecorderOpenFace.h>
 #include <RecorderOpenFaceParameters.h>
 
+#ifndef TORCHFACE_H
+#define TORCHFACE_H
+
 namespace TorchFaceAnalysis{
 
   class TorchFace:public torch::CustomClassHolder {
     public:
-      TorchFace(std::vector<std::string> arguments, c10::Dict<std::string, c10::IValue> misc_args);
+      TorchFace(std::vector<std::string> arguments, const c10::Dict<std::string, c10::IValue>& misc_args);
       torch::Tensor  ExtractFeatures(torch::Tensor img, c10::Dict<std::string, c10::IValue> ex_args);
       void SetImageParams(cv::Mat img);
       std::vector<cv::Rect_<float> > FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image, \
             const  c10::Dict<std::string, c10::IValue>& ex_args);
 
-      bool has_bounding_boxes = false;
       std::vector<std::string> arguments;
+      bool vis; bool rec;
       
       // OpenFace class Members
       Utilities::RecorderOpenFaceParameters recording_params;
@@ -46,6 +49,11 @@ namespace TorchFaceAnalysis{
       dlib::frontal_face_detector face_detector_hog;
       Utilities::Visualizer visualizer;
     private:
+      //ERROR: unable to declare c10::Dict<std::string, c10::IValue> type. Need appropriate constructor initialization
+      // c10::Dict<std::string, c10::IValue> misc_args = c10::impl::GenericDict<std::string, c10::IValue>();
+      
   };
 
 }
+
+#endif

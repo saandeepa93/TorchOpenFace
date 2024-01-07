@@ -1,6 +1,5 @@
 #include "TorchFace.h"
 #include <opencv2/dnn.hpp>
-#include <ATen/core/Dict.h>
 
 
 using namespace TorchFaceAnalysis;
@@ -8,10 +7,9 @@ using namespace TorchFaceAnalysis;
 // C++ -> Torch Bindings
 TORCH_LIBRARY(TorchFaceAnalysis, m) {
   m.class_<TorchFaceAnalysis::TorchFace>("TorchFace")
-    .def(torch::init<std::vector<std::string>, c10::Dict<std::string, c10::IValue>>())
+    .def(torch::init<std::vector<std::string>, const c10::Dict<std::string, c10::IValue>&>())
     .def("ExtractFeatures", &TorchFace::ExtractFeatures)
     ;
-  
 }
 
 
@@ -63,32 +61,34 @@ void TorchFace::SetImageParams(cv::Mat latest_frame){
 
 // Class primary methods
 // Constructor
-TorchFace::TorchFace(std::vector<std::string> arguments, c10::Dict<std::string, c10::IValue> misc_args) {
+TorchFace::TorchFace(std::vector<std::string> arguments, const c10::Dict<std::string, c10::IValue>& misc_args){
+
+  this->arguments = arguments;
+  this->vis = misc_args.at("vis").toBool();
+  this->rec = misc_args.at("rec").toBool();
+
 
   // Set parameters for Face detection models
-  this->arguments = arguments;
 	this->det_parameters = LandmarkDetector::FaceModelParameters (arguments);
-
+  // Set parameters for Facial Analysis module (AU, Gaze, Headpose etc..)
+	FaceAnalysis::FaceAnalyserParameters face_analysis_params(arguments);
+  face_analysis_params.OptimizeForImages();
   // load a face detectors
   this->classifier = cv::CascadeClassifier(this->det_parameters.haar_face_detector_location);
 	this->face_detector_hog = dlib::get_frontal_face_detector();
 	this->face_detector_mtcnn = LandmarkDetector::FaceDetectorMTCNN (this->det_parameters.mtcnn_face_detector_location);
-
 	// load LM model
   this->face_model = LandmarkDetector::CLNF(det_parameters.model_location);
   if (!face_model.loaded_successfully)
 	{
 		std::cout << "ERROR: Could not load the landmark detector" << std::endl;
 	}
-
-  // Set parameters for Facial Analysis module (AU, Gaze, Headpose etc..)
-	FaceAnalysis::FaceAnalyserParameters face_analysis_params(arguments);
-  face_analysis_params.OptimizeForImages();
+  // Load Face Analyser (AU)
 	this->face_analyser = FaceAnalysis::FaceAnalyser(face_analysis_params);
-
-
   // A utility for visualizing the results
-  this->visualizer = Utilities::Visualizer (arguments);
+  if(this->vis){
+    this->visualizer = Utilities::Visualizer (arguments);
+  }
 }
 
 // Face detect 
@@ -140,6 +140,11 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<st
   rgb_tensors = rgb_tensors.flip(1);
   std::vector<cv::Mat> batch_sim_warped_img;
 
+  // Open Recorder
+  this->recording_params = Utilities::RecorderOpenFaceParameters (this->arguments, false, false,
+                                                                this->image_reader.fx, this->image_reader.fy, this->image_reader.cx, this->image_reader.cy);
+  Utilities::RecorderOpenFace open_face_rec(ex_args.at("fname").toStringRef(),this->recording_params, this->arguments);
+
   for (int i = 0; i < rgb_tensors.size(0); ++i){
     cv::Mat rgb_image = TensorToMat(rgb_tensors[i]);
     cv::Mat_<uchar> grayscale_image;
@@ -147,13 +152,6 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<st
 
     // Set Camera Params    
     this->SetImageParams(rgb_image);
-    // Open Recorder
-    this->recording_params = Utilities::RecorderOpenFaceParameters (this->arguments, false, false,
-                                                                  this->image_reader.fx, this->image_reader.fy, this->image_reader.cx, this->image_reader.cy);
-    Utilities::RecorderOpenFace open_face_rec("sample",this->recording_params, this->arguments);
-    // Open Viz    
-    this->visualizer.SetImage(rgb_image, this->image_reader.fx, this->image_reader.fy, this->image_reader.cx, this->image_reader.cy);
-    
 
     // Step: Perform Face Detection
     std::vector<cv::Rect_<float> > face_detections = this->FaceDetection(grayscale_image, rgb_image, ex_args);
@@ -187,34 +185,39 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<st
       this->face_analyser.GetLatestHOG(hog_descriptor, num_hog_rows, num_hog_cols);
       batch_sim_warped_img.push_back(sim_warped_img);
 
-
-
       // Displaying the tracking visualizations
-			this->visualizer.SetObservationFaceAlign(sim_warped_img);
-			this->visualizer.SetObservationHOG(hog_descriptor, num_hog_rows, num_hog_cols);
-			this->visualizer.SetObservationLandmarks(face_model.detected_landmarks, 1.0, face_model.GetVisibilities()); // Set confidence to high to make sure we always visualize
-			this->visualizer.SetObservationPose(pose_estimate, 1.0);
-			this->visualizer.SetObservationGaze(gaze_direction0, gaze_direction1, LandmarkDetector::CalculateAllEyeLandmarks(face_model), LandmarkDetector::Calculate3DEyeLandmarks(face_model, image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy), face_model.detection_certainty);
-			this->visualizer.SetObservationActionUnits(face_analyser.GetCurrentAUsReg(), face_analyser.GetCurrentAUsClass());
-      // print_au(this->face_analyser.GetCurrentAUsReg());
-
-      // write_cv_img(sim_warped_img, "warped");
-      open_face_rec.SetObservationHOG(face_model.detection_success, hog_descriptor, num_hog_rows, num_hog_cols, 31); // The number of channels in HOG is fixed at the moment, as using FHOG
-			open_face_rec.SetObservationActionUnits(this->face_analyser.GetCurrentAUsReg(), this->face_analyser.GetCurrentAUsClass());
-			open_face_rec.SetObservationLandmarks(face_model.detected_landmarks, face_model.GetShape(image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy),
-				face_model.params_global, face_model.params_local, face_model.detection_certainty, face_model.detection_success);
-			open_face_rec.SetObservationPose(pose_estimate);
-			open_face_rec.SetObservationGaze(gaze_direction0, gaze_direction1, gaze_angle, LandmarkDetector::CalculateAllEyeLandmarks(face_model), LandmarkDetector::Calculate3DEyeLandmarks(face_model, image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy));
-			open_face_rec.SetObservationFaceAlign(sim_warped_img);
-			open_face_rec.SetObservationFaceID(face);
-			open_face_rec.WriteObservation();
+      // Open Viz    
+      if (this->vis){
+        this->visualizer.SetImage(rgb_image, this->image_reader.fx, this->image_reader.fy, this->image_reader.cx, this->image_reader.cy);
+        this->visualizer.SetObservationFaceAlign(sim_warped_img);
+        this->visualizer.SetObservationHOG(hog_descriptor, num_hog_rows, num_hog_cols);
+        this->visualizer.SetObservationLandmarks(face_model.detected_landmarks, 1.0, face_model.GetVisibilities()); // Set confidence to high to make sure we always visualize
+        this->visualizer.SetObservationPose(pose_estimate, 1.0);
+        this->visualizer.SetObservationGaze(gaze_direction0, gaze_direction1, LandmarkDetector::CalculateAllEyeLandmarks(face_model), LandmarkDetector::Calculate3DEyeLandmarks(face_model, image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy), face_model.detection_certainty);
+        this->visualizer.SetObservationActionUnits(face_analyser.GetCurrentAUsReg(), face_analyser.GetCurrentAUsClass());
+      }
+      if(this->rec){
+        open_face_rec.SetObservationHOG(face_model.detection_success, hog_descriptor, num_hog_rows, num_hog_cols, 31); // The number of channels in HOG is fixed at the moment, as using FHOG
+        open_face_rec.SetObservationActionUnits(this->face_analyser.GetCurrentAUsReg(), this->face_analyser.GetCurrentAUsClass());
+        open_face_rec.SetObservationLandmarks(face_model.detected_landmarks, face_model.GetShape(image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy),
+          face_model.params_global, face_model.params_local, face_model.detection_certainty, face_model.detection_success);
+        open_face_rec.SetObservationPose(pose_estimate);
+        open_face_rec.SetObservationGaze(gaze_direction0, gaze_direction1, gaze_angle, LandmarkDetector::CalculateAllEyeLandmarks(face_model), LandmarkDetector::Calculate3DEyeLandmarks(face_model, image_reader.fx, image_reader.fy, image_reader.cx, image_reader.cy));
+        open_face_rec.SetObservationFaceAlign(sim_warped_img);
+        open_face_rec.SetObservationFaceID(face);
+        open_face_rec.WriteObservation();
+      }
 
     }
 
-    open_face_rec.SetObservationVisualization(this->visualizer.GetVisImage());
-		open_face_rec.WriteObservationTracked();
+    if (this->vis){
+      open_face_rec.SetObservationVisualization(this->visualizer.GetVisImage());
+      open_face_rec.WriteObservationTracked();
+    }
 
-		open_face_rec.Close();
+    if (this->rec){
+  		open_face_rec.Close();
+    }
 
 
   }
