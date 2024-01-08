@@ -1,19 +1,23 @@
 # **TorchFace**
 
-### This repository is to integrate [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace) with PyTorch C++ frontend. Follow the steps below to setup the repo.
+### This repository is to compile [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace) with PyTorch C++ frontend. 
 
-# **Installation**
-**Follow installation steps in the [wiki](https://github.com/saandeepa93/TorchOpenFace/wiki/Unix-Setup) page.**
+# **Dependency Installation**
+**Follow installation steps in the [wiki](https://github.com/saandeepa93/TorchOpenFace/wiki/Unix-Setup) page. Update the CMakeLists.txt files accordingly.**
 
-# **Usage**
-* To load the `libTorchFace.so` library in PyTorch, use the following code.
+## **TorchFace Installation**
+* Follow the usual build process to generate `libTorchFace.so` library under `/build/lib/TorchFace/` directory
 
 ```
-torch.classes.load_library(lib_path)
-obj = torch.classes.TorchFaceAnalysis.TorchFace([model_root_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt'])
+git clone https://github.com/saandeepa93/TorchOpenFace.git
+cd TorchFace
+mkdir build
+cd build
+cmake ..
+make
 ```
 
-## **FaceLandmarkImg Executable**
+## **Usage in Python/PyTorch**
 
 ### **Individual images**
 ```
@@ -41,26 +45,33 @@ for keys, values in features.items():
   print(f"{keys}: {values.size()}")
 ```
 
-### **Using DataLoader**
+### **Using DataLoader (code snippet)**
 ```
-  # LOAD CONFIGURATION
-  cfg = get_cfg_defaults()
-  cfg.merge_from_file(config_path)
-  
-  torch.classes.load_library("<dir>/libTorchFace.so")
-  obj = torch.classes.TorchFaceAnalysis.TorchFace([model_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt'])
-  
-  test_set = RafDb(cfg, "val", transform, transform)
-  test_loader = DataLoader(test_set, batch_size=cfg.TRAINING.BATCH, shuffle=False, num_workers = cfg.DATASET.NUM_WORKERS)
-  
-  # BBOX (0, 0, max, max) since RAF-DB images are already aligned!
+  torch.classes.load_library(lib_path)
+  openface_args = [model_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt', '-out_dir', dest_dir]
   misc_args = {
-    "bbox":[0., 0., float(cfg.DATASET.IMG_SIZE), float(cfg.DATASET.IMG_SIZE)]
+    "vis": True, 
+    "rec": True
   }
-
-  for b, (img, _) in enumerate(tqdm(test_loader)):
-    obj.ExtractFeatures(img.cpu().detach(), misc_args)
-    e()
+  obj = torch.classes.TorchFaceAnalysis.TorchFace(openface_args, misc_args)
+  
+  transform = transforms.Compose([
+                transforms.Resize(cfg.DATASET.IMG_SIZE, interpolation=transforms.InterpolationMode.BILINEAR),
+                transforms.ToTensor(), 
+                # transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                #                             std=[0.229, 0.224, 0.225]) 
+                ])
+  test_set = RafDb(cfg, "val", transform, transform)
+  test_loader = DataLoader(test_set, batch_size=32, shuffle=False, num_workers = cfg.DATASET.NUM_WORKERS)
+  
+  bbox = [0., 0., float(cfg.DATASET.IMG_SIZE), float(cfg.DATASET.IMG_SIZE)]
+  for b, (img, _, fnames) in enumerate(tqdm(test_loader)):
+    # BBOX (0, 0, max, max) since RAF-DB images are already aligned!
+    ex_args = {
+      "bbox":[bbox for _ in range(img.size(0))],
+      "fname": list(fnames)
+    }
+    obj.ExtractFeatures(img.cpu().detach(), ex_args)
 ```
 
 ## **Directory Structure**
