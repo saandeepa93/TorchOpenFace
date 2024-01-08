@@ -31,6 +31,15 @@ void write_cv_img(cv::Mat img, std::string fname){
 }
 
 
+std::vector<double> ToVector(const cv::Rect_<float>& rect) {
+    std::vector<double> vec;
+    vec.push_back(static_cast<double>(rect.x));
+    vec.push_back(static_cast<double>(rect.y));
+    vec.push_back(static_cast<double>(rect.width));
+    vec.push_back(static_cast<double>(rect.height));
+    return vec;
+}
+
 std::vector<std::string> ToVectString(c10::IValue ivalues){
   std::vector<std::string> strings;
   // Get the list of IValues
@@ -42,9 +51,6 @@ std::vector<std::string> ToVectString(c10::IValue ivalues){
 
   return strings;
 }
-
-
-
 
 cv::Mat ToMat(torch::Tensor rgb_tensor){
   rgb_tensor = rgb_tensor.permute({1, 2, 0}).contiguous();
@@ -159,12 +165,16 @@ std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& g
 // FaceLandmarkImg executable code
 torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<std::string, c10::IValue> ex_args){
 
-  // Flip channels
-  rgb_tensors = rgb_tensors.flip(1);
   // Var to hold masked aligned image
   std::vector<cv::Mat> batch_sim_warped_img;
+  std::vector<std::vector<double>> face_detection_all;
+  std::vector<double> au_intensities;
+  std::vector<double> au_occurence;
+  
   // Get all fnames
   std::vector<std::string> fnames = ToVectString(ex_args.at("fname"));
+  // Flip channels
+  rgb_tensors = rgb_tensors.flip(1);
 
   // Open Recorder
   this->recording_params = Utilities::RecorderOpenFaceParameters (this->arguments, false, false,
@@ -180,9 +190,12 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<st
 
     // Step: Perform Face Detection
     std::vector<cv::Rect_<float> > face_detections = this->FaceDetection(grayscale_image, rgb_image, ex_args, i);
+    face_detections = face_detections[0];
+    for(auto face: face_detections){
+      face_detection_all.push_back(ToVector(face));
+    }
 
     // Step: Perform landmark detection for every face detected
-    int face_det = 0;
     for (size_t face = 0; face < face_detections.size(); ++face)
     {
       // if there are multiple detections go through them
