@@ -29,13 +29,13 @@ namespace TorchFaceAnalysis{
   class TorchFace:public torch::CustomClassHolder {
     public:
       TorchFace(std::vector<std::string> arguments, const c10::Dict<std::string, c10::IValue>& misc_args);
-      torch::Tensor  ExtractFeatures(torch::Tensor img, c10::Dict<std::string, c10::IValue> ex_args);
+      c10::Dict<std::string, torch::Tensor> ExtractFeatures(torch::Tensor img, c10::Dict<std::string, c10::IValue> ex_args);
       void SetImageParams(cv::Mat img);
       std::vector<cv::Rect_<float> > FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image, \
           const c10::Dict<std::string, c10::IValue>& ex_args, const int& i);
 
       std::vector<std::string> arguments;
-      bool vis; bool rec;
+      bool vis; bool rec; bool first_only;
       
       // OpenFace class Members
       Utilities::RecorderOpenFaceParameters recording_params;

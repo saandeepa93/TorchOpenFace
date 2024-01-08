@@ -9,13 +9,14 @@ root_dir = "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3"
 model_dir = os.path.join(root_dir, "models")
 dest_dir = os.path.join(root_dir, "data/output_dir")
 lib_path = os.path.join(root_dir, "./build/lib/TorchFace/libTorchFace.so")
-torch.classes.load_library(lib_path)
 
 openface_args = [model_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt', '-out_dir', dest_dir]
 misc_args = {
   "vis": True, 
-  "rec": True
+  "rec": True,
+  "first_only": True
 }
+torch.classes.load_library(lib_path)
 obj = torch.classes.TorchFaceAnalysis.TorchFace(openface_args, misc_args)
 
 trans = transforms.ToTensor()
@@ -30,7 +31,6 @@ ex_args = {
 }
 
 start = time.time()
-face_det = obj.ExtractFeatures(img.clone().detach().cpu().contiguous(), ex_args)
-print(face_det.size())
-face_det = face_det/255.
-save_image(face_det[0], "../data/saved.png")
+features = obj.ExtractFeatures(img.clone().detach().cpu().contiguous(), ex_args)
+for keys, values in features.items():
+  print(f"{keys}: {values.size()}")

@@ -17,31 +17,28 @@ obj = torch.classes.TorchFaceAnalysis.TorchFace([model_root_dir, '-wild', '-mloc
 
 ### **Individual images**
 ```
-import torch 
-from torchvision import transforms 
-from torchvision.utils import save_image
-from PIL import Image
-import os 
-import time
-
-root_dir = "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3"
-model_dir = os.path.join(root_dir, "models")
-lib_path = os.path.join(root_dir, "./build/lib/TorchFace/libTorchFace.so")
+openface_args = [model_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt', '-out_dir', dest_dir]
+misc_args = {
+  "vis": True, 
+  "rec": True,
+  "first_only": True
+}
 torch.classes.load_library(lib_path)
-
-
-obj = torch.classes.TorchFaceAnalysis.TorchFace([model_dir, '-wild', '-mloc', './models/model/main_ceclm_general.txt']) # C++ class Object Creation
+obj = torch.classes.TorchFaceAnalysis.TorchFace(openface_args, misc_args)
 
 trans = transforms.ToTensor()
-img = Image.open("../data/test_1894_aligned.jpg").convert('RGB')
+img = Image.open("../data/sample3.png").convert('RGB')
 img = trans(img)
-img = img.flip(0) # RGB->BGR. Can do in C++ as well.
-img = img.unsqueeze(0).repeat(32, 1, 1, 1) # Sample Batch 
-misc_args = {
-  "bbox": [0., 0., 112., 112.]
+img = img.unsqueeze(0).repeat(2, 1, 1, 1) # Sample Batch 
+ex_args = {
+  "bbox": [[204., 136., 326., 283.], [204., 136., 326., 288.]], 
+  "fname": ["saandeep2", "saande3"]
 }
 
-obj.ExtractFeatures(img, misc_args) # Class Method Call
+start = time.time()
+features = obj.ExtractFeatures(img.clone().detach().cpu().contiguous(), ex_args)
+for keys, values in features.items():
+  print(f"{keys}: {values.size()}")
 ```
 
 ### **Using DataLoader**
