@@ -30,7 +30,23 @@ void write_cv_img(cv::Mat img, std::string fname){
   cv::imwrite("../data/" + fname + ".png", img);
 }
 
-cv::Mat TensorToMat(torch::Tensor rgb_tensor){
+
+std::vector<std::string> ToVectString(c10::IValue ivalues){
+  std::vector<std::string> strings;
+  // Get the list of IValues
+  c10::List<c10::IValue> list = ivalues.toList();
+  // Iterate over the list and convert each IValue to a string
+  for (const c10::IValue& item : list) {
+    strings.push_back(item.toStringRef());
+  }
+
+  return strings;
+}
+
+
+
+
+cv::Mat ToMat(torch::Tensor rgb_tensor){
   rgb_tensor = rgb_tensor.permute({1, 2, 0}).contiguous();
   rgb_tensor = rgb_tensor.mul(255).clamp(0, 255).to(torch::kU8);
   cv::Mat rgb_mat = cv::Mat(rgb_tensor.size(0), rgb_tensor.size(1), CV_8UC3, rgb_tensor.data_ptr());
@@ -38,7 +54,7 @@ cv::Mat TensorToMat(torch::Tensor rgb_tensor){
 
 }
 
-torch::Tensor MatToTensor(std::vector<cv::Mat> mats){
+torch::Tensor ToTensor(std::vector<cv::Mat> mats){
   std::vector<torch::Tensor> batched_warped_tensors;
   for(const cv::Mat& mat: mats){
     torch::Tensor tensor = torch::from_blob(mat.data, { mat.rows, mat.cols, 3 }, at::kByte);
@@ -93,25 +109,31 @@ TorchFace::TorchFace(std::vector<std::string> arguments, const c10::Dict<std::st
 
 // Face detect 
 std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image, \
-      const c10::Dict<std::string, c10::IValue>& ex_args){
-  // Step: Perform Face Detection
+      const c10::Dict<std::string, c10::IValue>& ex_args, const int& i){
   std::vector<cv::Rect_<float> > face_detections;
 
   // Add: Include feature to provide bbox values
   if (ex_args.contains("bbox"))
   {
-    c10::IValue bbox = ex_args.at("bbox");
-    if (!bbox.isList()) {
+    c10::IValue bboxes = ex_args.at("bbox");
+    if (!bboxes.isList()) {
         throw std::runtime_error("IValue is not a list");
     }
+    // Iterate over the outer list
+    c10::List<c10::IValue> outer_bbox = bboxes.toList();
+    c10::IValue bbox = outer_bbox.get(i);
+
+    // Specific BBOX
     std::vector<c10::IValue> elements = bbox.toList().vec();
     float x = elements[0].toDouble();
     float y = elements[1].toDouble();
     float width = elements[2].toDouble() - elements[0].toDouble();
     float height = elements[3].toDouble() - elements[1].toDouble();
     cv::Rect_<float> rect(x, y, width, height);
+    
     // Now you can push it back into the vector
     face_detections.push_back(rect);
+
   }
   // Perform Face Detections
   else
@@ -137,16 +159,19 @@ std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& g
 // FaceLandmarkImg executable code
 torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<std::string, c10::IValue> ex_args){
 
+  // Flip channels
   rgb_tensors = rgb_tensors.flip(1);
+  // Var to hold masked aligned image
   std::vector<cv::Mat> batch_sim_warped_img;
+  // Get all fnames
+  std::vector<std::string> fnames = ToVectString(ex_args.at("fname"));
 
   // Open Recorder
   this->recording_params = Utilities::RecorderOpenFaceParameters (this->arguments, false, false,
                                                                 this->image_reader.fx, this->image_reader.fy, this->image_reader.cx, this->image_reader.cy);
-  Utilities::RecorderOpenFace open_face_rec(ex_args.at("fname").toStringRef(),this->recording_params, this->arguments);
-
   for (int i = 0; i < rgb_tensors.size(0); ++i){
-    cv::Mat rgb_image = TensorToMat(rgb_tensors[i]);
+    Utilities::RecorderOpenFace open_face_rec(fnames[i],this->recording_params, this->arguments);
+    cv::Mat rgb_image = ToMat(rgb_tensors[i]);
     cv::Mat_<uchar> grayscale_image;
     Utilities::ConvertToGrayscale_8bit(rgb_image, grayscale_image);
 
@@ -154,7 +179,7 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<st
     this->SetImageParams(rgb_image);
 
     // Step: Perform Face Detection
-    std::vector<cv::Rect_<float> > face_detections = this->FaceDetection(grayscale_image, rgb_image, ex_args);
+    std::vector<cv::Rect_<float> > face_detections = this->FaceDetection(grayscale_image, rgb_image, ex_args, i);
 
     // Step: Perform landmark detection for every face detected
     int face_det = 0;
@@ -221,7 +246,7 @@ torch::Tensor TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<st
 
 
   }
-  torch::Tensor warped_tensor = MatToTensor(batch_sim_warped_img);
+  torch::Tensor warped_tensor = ToTensor(batch_sim_warped_img);
   return warped_tensor;
 
 }

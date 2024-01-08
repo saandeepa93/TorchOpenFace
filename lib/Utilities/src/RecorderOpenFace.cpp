@@ -120,6 +120,10 @@ void RecorderOpenFace::PrepareRecording(const std::string& in_filename)
 {
 
 	// Construct the directories required for the output
+	// ADDED: 
+	record_root = record_root + "/" + in_filename;
+	// ADDED: 
+	
 	CreateDirectory(record_root);
 
 	// Create the filename for the general output file that contains all of the meta information about the recording
@@ -133,7 +137,6 @@ void RecorderOpenFace::PrepareRecording(const std::string& in_filename)
 		std::cout << "ERROR: could not open the output file:" << of_det_name << ", either the path of the output directory is wrong or you do not have the permissions to write to it" << std::endl;
 		exit(1);
 	}
-	std::cout<<"record_root1: "<<record_root<<std::endl;
 
 	// Populate relative and full path names in the meta file, unless it is a webcam
 	if (!params.isFromWebcam())
@@ -335,8 +338,6 @@ void RecorderOpenFace::WriteObservation()
 		metadata_file << "Pose: " << params.outputPose() << std::endl;
 		metadata_file << "Shape parameters: " << params.outputPDMParams() << std::endl;
 
-		std::cout<<"record_root: "<<record_root<<std::endl;
-		std::cout<<"csv_filename: "<<csv_filename<<std::endl;
 		csv_filename = (fs::path(record_root) / csv_filename).string();
 		csv_recorder.Open(csv_filename, params.isSequence(), params.output2DLandmarks(), params.output3DLandmarks(), params.outputPDMParams(), params.outputPose(),
 			params.outputAUs(), params.outputGaze(), num_face_landmarks, num_model_modes, num_eye_landmarks, au_names_class, au_names_reg);
