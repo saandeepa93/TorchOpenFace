@@ -1,21 +1,26 @@
 #include<iostream>
-// #include<torch/torch.h>
+#include<torch/script.h>
 #include "TorchFace.h"
 // #include<any>
 
 int main() {
-    // c10::impl::GenericDict myDict(c10::StringType::get(), c10::IValueType::get());
-    c10::Dict<std::string, c10::IValue> myDict;
+  c10::impl::GenericDict myDict = c10::impl::GenericDict(c10::StringType::get(), c10::AnyType::get());
+  myDict.insert("key1", c10::IValue("value1"));
+  myDict.insert("key2", c10::IValue(42));
 
-    // Insert an integer
-    myDict.insert("frame", c10::IValue(1));
+  c10::impl::GenericDict newDict;
+    for (const auto& kv : dict) {
+        // Convert the key to a string, which is a supported type.
+        std::string key = kv.key().toStringRef();
+        c10::IValue value = kv.value();
+        newDict.insert(key, value);
+  }
 
-    // Insert a string
-    myDict.insert("second", c10::IValue("string"));  
 
+  std::string model_dir = "./data/";
+  std::vector<std::string> arguments = {model_dir, "-wild", "-mloc", "./models/model/main_ceclm_general.txt"};
 
-  std::string model_dir = "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/models";
-  TorchFaceAnalysis::TorchFace obj({model_dir, "-wild", "-mloc", "./models/model/main_ceclm_general.txt"});
+  TorchFaceAnalysis::TorchFace obj(arguments, newDict);
 
   torch::Tensor img = torch::randn({1, 3, 32, 32});
   // obj.ExtractFeatures(img, myDict);

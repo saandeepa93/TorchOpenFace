@@ -1,9 +1,6 @@
 
 # **Installation**
 
-### **OpenFace Dependency Installation**
-Follow the detailed steps of [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Unix-Installation#dependency-installation) dependency installation. *Skip the dlib installation step as it needs to be installed from source. Additionally, you do not need to actually install OpenFace, just the dependencies*
-
 ### **Pytorch/Torchlib Setup**
 
 #### **Some Background**
@@ -15,7 +12,7 @@ To support these external libraries, the torchlib libraries must be `CXX_ABI` en
 
 However, This wont support using the shared objects in the PyTorch files (`.py`) because PyTorch by default is `CXX_ABI` disabled. The only way to enable is to build PyTorch from source. 
 
-**Therefore, you should build the latest PyTorch from source and enable `CXX_ABI` manually. Once you build PyTorch from source, you donot need a separate installation of libtorch as well.**
+**Therefore, you should build the latest PyTorch from source and enable `CXX_ABI` manually. Once you build PyTorch from source, you donot need a separate installation of libtorch.**
 
 ### **Build PyTorch from source**
 * Ensure you have a clean installation of CUDA and nvcc. Check both versions by running the below command. Any error in either commands means they are not installed correctly.
@@ -31,9 +28,14 @@ nvcc --version
 
 * Once installed, to access torchlib inside your cpp file, simply edit the `CMAKE_PREFIX_PATH` to directory where PyTorch was cloned to and built
 ```
-SET(CMAKE_PREFIX_PATH <PyTorch-install_directory)
+SET(CMAKE_PREFIX_PATH <PyTorch-install_directory>)
 find_package(Torch REQUIRED)
 ```
+
+
+## **OpenFace Dependency Installation without sudo**
+* Sometimes, the machines we work on does not allow us to install any libraries in the install paths (`sudo apt-get <some-lib>`). OpenFace is one such tool. However, you can circumvent this by installing its three key components (dlib, OpenCV, OpenBLAS) locally from source. This assumes that the machine has gcc compiler and other basic dependencies available, which is the case for most Linux machines.
+
 
 ## **Dlib Installation (credits to [perplexity](https://www.perplexity.ai/))**
   #### If you try to run dlib libraries, it throws an error. For this reason, you have to compile dlib from source and additionally install it locally (to remove sudo dependency). To compile dlib as a shared library using CMake  without sudo, you can follow these steps:
@@ -100,6 +102,8 @@ find_package(Torch REQUIRED)
   -D BUILD_EXAMPLES=OFF \
   -D BUILD_TESTS=OFF \
   -D WITH_CUDA=OFF \
+-DOpenBLAS_INCLUDE_DIR=/data/scanavan/saandeep/OpenFace/installs/OpenBLAS/include \
+-DOpenBLAS_LIB=/data/scanavan/saandeep/OpenFace/installs/OpenBLAS/lib/libopenblas.so \
   ..
   ```
 
@@ -117,16 +121,24 @@ find_package(Torch REQUIRED)
   * In your CMakeLists.txt, find OpenCV using the following line
   ```
   find_package( OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect
-          PATHS "<<your-install-dir>>/lib/cmake/opencv4/" NO_DEFAULT_PATH )
+          PATHS "<your-install-dir>/lib/cmake/opencv4/" NO_DEFAULT_PATH )
   ```
-
-  * Link the libraries
-  ```
-  target_link_libraries(TorchFace ${OpenBLAS_LIBRARIES})
-  ```
-
 
 ## **OpenBLAS Installation**
+* You need gfortran compiler to compile OpenBLAS from source. Check whether your machine has it.
+```
+gfortran --version
+```
+
+if the above command returns an error, install it by running.
+```
+conda install -c conda-forge gfortran_linux-64
+```
+
+* you can find the install path of gfortran by 
+```
+which gfortran
+```
 
 * Build OpenBLAS from source.
 ```
@@ -134,9 +146,17 @@ find_package(Torch REQUIRED)
 git clone https://github.com/xianyi/OpenBLAS
 
 # compile the library
-cd OpenBLAS && make FC=gfortran
+cd OpenBLAS
+make FC=<output-of-which-gfortran>
 
-# install the library
+```
+* If the make command throws a `TARGET Error`, it needs a specific cpu TARGET. The most common CPU TARGET is `NEHALEM` for intel. You can try that.
+```
+make TARGET=NEHALEM FC=<output-of-which-gfortran>
+```
+
+* Install the library
+```
 make PREFIX=<your-install-dir> install
 ```
 
@@ -149,6 +169,11 @@ export LD_LIBRARY_PATH=<your-install-dir>/lib/:$LD_LIBRARY_PATH
   ```
   find_package(OpenBLAS REQUIRED PATHS "<your-install-dir>/lib/cmake/openblas" NO_DEFAULT_PATH)
   ```
+* Due to version change in OpenBLAS installation, the libraries are found in `OpenBLAS_LIBRARIES` instead of `OpenBLAS_LIB`. Update this variable in any CMakeList file while linking OpenBLAS libraries
+
+```
+target_link_libraries(LandmarkDetector PUBLIC ${OpenCV_LIBS} ${OpenBLAS_LIBRARIES})
+```
 
 
 ## **TorchFace Installation**
@@ -161,19 +186,67 @@ cmake ..
 make
 ```
 
-cmake -D CMAKE_BUILD_TYPE=RELEASE \
--D CMAKE_INSTALL_PREFIX='/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external' \
--D BUILD_EXAMPLES=OFF \
--D BUILD_TESTS=OFF \
--D WITH_CUDA=OFF \
-..
 
-export LD_LIBRARY_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/lib:$LD_LIBRARY_PATH
-export PKG_CONFIG_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/lib/pkgconfig:$PKG_CONFIG_PATH
+# **STEPS in GAIVI**
 
- cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external -D BUILD_TIFF=ON -D WITH_TBB=ON -D BUILD_SHARED_LIBS=ON \
--D OPENCV_EXTRA_MODULES_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/opencv_shared/ ..
+## **Conda**
+
+* It is important to run all compilations within conda. This isolates any dependency on system libraries which might be of previous versions.
+
+* Create conda environment in a public directory so that it can be accessible by other users without need for separate compilation.
+```
+conda create -p <public-dir>/openface python=3.10
+conda activate <public-dir>/openface
+```
+
+* Install cmake, gcc, and gfortran within conda
+```
+conda install -y cmake
+
+conda install -c anaconda -y gcc_linux-64
+conda install -c anaconda -y gxx_linux-64
+
+conda install -c conda-forge -y gfortran
+```
+
+* While running any cmake command, use conda installed C++ compilers
+```
+which x86_64-conda_cos6-linux-gnu-g++ (versions may vary)
+cmake -DCMAKE_CXX_COMPILER=/path/to/your/compiler ..
+```
+
+* For OpenCV compilation, it is also necessary to install LAPACK (MKL)
+```
+conda install -y mkl mkl-include
+```
+
+* Create public install dirs
+```
+mkdir <public-dir>/opencv
+mkdir <public-dir>/OpenBLAS
+mkdir <public-dir>/dlib
+```
+
+## **OpenBLAS**
+
+* clone and build OpenBLAS from source. Specify a CPU target explicitly
+```
+git clone https://github.com/xianyi/OpenBLAS
+cd OpenBLAS
+make TARGET=NEHALEM FC=<output-of-`which gfortran`>
+```
+
+* Install in a given path
+```
+make PREFIX=<OpenBLAS-install-dir> install
+```
+
+* Update system paths
+```
+export LD_LIBRARY_PATH=<OpenBLAS-install-dir>/lib/:$LD_LIBRARY_PATH
+```
+
+## **OpenCV**
 
 
-export LD_LIBRARY_PATH=/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/OpenBLAS/lib/:$LD_LIBRARY_PATH
 

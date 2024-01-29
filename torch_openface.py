@@ -20,8 +20,7 @@ torch.classes.load_library(lib_path)
 obj = torch.classes.TorchFaceAnalysis.TorchFace(openface_args, misc_args)
 
 trans = transforms.ToTensor()
-img = Image.open("../data/sample3.png").convert('RGB')
-# img = Image.open("../data/IMG_3110.jpg").convert('RGB')
+img = Image.open("/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/data/sample3.png").convert('RGB')
 img = trans(img)
 img = img.unsqueeze(0).repeat(2, 1, 1, 1) # Sample Batch 
 ex_args = {

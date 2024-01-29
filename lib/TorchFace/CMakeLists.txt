@@ -1,19 +1,21 @@
+# Include .h files
 SET(
   SOURCE
   src/TorchFace.cpp
-)
-
+  src/TorchUtils.cpp
+  )
+  
 SET(
   HEADERS
   include/TorchFace.h
+  include/TorchUtils.h
 )
-
+  
 add_library(TorchFace SHARED ${SOURCE} ${HEADERS})
+target_include_directories(TorchFace PUBLIC include/)
 
 MESSAGE("TorchFace_SOURCE_DIR: ${TorchFace_SOURCE_DIR}")
 
-# Include .h files
-target_include_directories(TorchFace PUBLIC include/)
 # Include OpenCVs .h files
 target_include_directories(TorchFace PUBLIC ${OpenCV_INCLUDE_DIRS})
 MESSAGE("OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS}")

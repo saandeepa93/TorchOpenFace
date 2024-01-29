@@ -1,9 +1,11 @@
 #include "TorchFace.h"
 #include <opencv2/dnn.hpp>
 #include <typeinfo>
+#include "TorchUtils.h"
 
 
 using namespace TorchFaceAnalysis;
+using namespace TorchUtilities;
 
 /***************************C++ -> Torch Bindings***********************************/
 TORCH_LIBRARY(TorchFaceAnalysis, m) {
@@ -14,49 +16,9 @@ TORCH_LIBRARY(TorchFaceAnalysis, m) {
 }
 
 
-/***************************Simple Helpers***********************************/
-
-void print_vec(std::vector<std::string> args){
-  for(const std::string& str : args){
-    // std::cout<<"Args: "<<str<<std::endl;
-  }
-}
-
-void print_au(std::vector<std::pair<std::string, double>> data){
-  for (const auto& pair : data) {
-        std::cout << pair.first << ": " << pair.second << std::endl;
-    }
-}
-
-void write_cv_img(cv::Mat img, std::string fname){
-  cv::imwrite("../data/" + fname + ".png", img);
-}
-
-
-
-/***************************Function Overloading***********************************/
-torch::Tensor ToTemplateTensor(const cv::Mat& mat){
-  torch::Tensor tensor = torch::from_blob(mat.data, { mat.rows, mat.cols, 3 }, at::kByte);
-  return tensor.clone();
-}
-
-torch::Tensor ToTemplateTensor(const cv::Mat_<float>& mat){
-  torch::Tensor tensor = torch::from_blob(mat.data, {mat.rows, mat.cols}, torch::kFloat32);
-  return tensor.clone();
-}
-
-torch::Tensor ToTemplateTensor(const std::vector<double>& mat){
-  torch::Tensor tensor = torch::tensor(std::vector<double>(mat.begin(), mat.end()), torch::kDouble);
-  return tensor.clone();
-}
-
-torch::Tensor ToTemplateTensor(const cv::Vec6d& mat){
-  torch::Tensor tensor = torch::from_blob(const_cast<double*>(mat.val), {6}, torch::kDouble);
-  return tensor.clone();
-}
-
 
 /***************************Template Functions***********************************/
+// BUG: TorchLib does not support compiled template function headers in .so. Needs to be statically linked.
 template <typename T>
 std::vector<T> squeeze(const std::vector<std::vector<T>>& vecVec) {
     std::vector<T> vec;
@@ -85,48 +47,7 @@ torch::Tensor ToTensor(std::vector<T> mats, std::string template_type){
 }
 
 
-/***************************Utility Functions***********************************/
-std::vector<double> ToVector(const cv::Rect_<float>& rect) {
-    std::vector<double> vec;
-    vec.push_back(static_cast<double>(rect.x));
-    vec.push_back(static_cast<double>(rect.y));
-    vec.push_back(static_cast<double>(rect.width));
-    vec.push_back(static_cast<double>(rect.height));
-    return vec;
-}
-
-std::vector<std::string> ToVectString(c10::IValue ivalues){
-  std::vector<std::string> strings;
-  // Get the list of IValues
-  c10::List<c10::IValue> list = ivalues.toList();
-  // Iterate over the list and convert each IValue to a string
-  for (const c10::IValue& item : list) {
-    strings.push_back(item.toStringRef());
-  }
-
-  return strings;
-}
-
-cv::Mat ToMat(torch::Tensor rgb_tensor){
-  rgb_tensor = rgb_tensor.permute({1, 2, 0}).contiguous();
-  rgb_tensor = rgb_tensor.mul(255).clamp(0, 255).to(torch::kU8);
-  cv::Mat rgb_mat = cv::Mat(rgb_tensor.size(0), rgb_tensor.size(1), CV_8UC3, rgb_tensor.data_ptr());
-  return rgb_mat.clone();
-
-}
-
-
-
-
-
 /***************************Class Methods***********************************/
-// Class helper methods
-void TorchFace::SetImageParams(cv::Mat latest_frame){
-  this->image_reader.image_height = latest_frame.size().height;
-  this->image_reader.image_width = latest_frame.size().width;
-  this->image_reader.SetCameraIntrinsics(-1, -1, -1, -1);
-
-}
 
 // Class primary methods
 // Constructor
@@ -159,6 +80,13 @@ TorchFace::TorchFace(std::vector<std::string> arguments, const c10::Dict<std::st
   if(this->vis){
     this->visualizer = Utilities::Visualizer (arguments);
   }
+}
+
+void TorchFace::SetImageParams(cv::Mat latest_frame){
+  this->image_reader.image_height = latest_frame.size().height;
+  this->image_reader.image_width = latest_frame.size().width;
+  this->image_reader.SetCameraIntrinsics(-1, -1, -1, -1);
+
 }
 
 // Face detect 
@@ -220,6 +148,9 @@ c10::Dict<std::string, torch::Tensor> TorchFace::ExtractFeatures(torch::Tensor r
   std::vector<std::vector<cv::Mat_<float>>> batch_detected_landmarks;
   std::vector<std::vector<cv::Vec6d>> batch_head_pose;
   
+
+  std::vector<std::vector<bool>> success_flags;
+  
   // Get all fnames
   std::vector<std::string> fnames = ToVectString(ex_args.at("fname"));
   // Flip channels
@@ -237,6 +168,7 @@ c10::Dict<std::string, torch::Tensor> TorchFace::ExtractFeatures(torch::Tensor r
     std::vector<std::vector<double>> single_au_occurence;
     std::vector<cv::Mat_<float>> single_detected_landmarks;
     std::vector<cv::Vec6d> single_head_pose;
+    std::vector<bool> success_flags;
     
 
     Utilities::RecorderOpenFace open_face_rec(fnames[i],this->recording_params, this->arguments);
@@ -330,6 +262,7 @@ c10::Dict<std::string, torch::Tensor> TorchFace::ExtractFeatures(torch::Tensor r
       single_detected_landmarks.push_back(face_model.detected_landmarks);
       single_head_pose.push_back(pose_estimate);
     }
+
 
     // Write Image-level output
     batch_sim_warped_img.push_back(single_sim_warped_img);
