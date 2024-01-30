@@ -3,6 +3,7 @@ SET(
   SOURCE
   src/TorchFace.cpp
   src/TorchUtils.cpp
+  bindings.cpp
   )
   
 SET(
