@@ -247,6 +247,7 @@ export LD_LIBRARY_PATH=<OpenBLAS-install-dir>/lib/:$LD_LIBRARY_PATH
 ```
 
 ## **OpenCV**
+export LD_LIBRARY_PATH=/home/saandeepaath-admin/anaconda3/envs/cpp/lib:/usr/local/cuda-12.2/lib64:$LD_LIBRARY_PATH
 
 
 

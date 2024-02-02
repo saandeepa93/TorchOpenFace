@@ -1,15 +1,17 @@
 # Include .h files
 SET(
   SOURCE
-  src/TorchFace.cpp
+  src/TorchFaceLandmarkImg.cpp
   src/TorchUtils.cpp
   bindings.cpp
+  src/TorchFeatureExtraction.cpp
   )
   
 SET(
   HEADERS
-  include/TorchFace.h
+  include/TorchFaceLandmarkImg.h
   include/TorchUtils.h
+  include/TorchFeatureExtraction.h
 )
   
 add_library(TorchFace SHARED ${SOURCE} ${HEADERS})
@@ -24,8 +26,8 @@ MESSAGE("TORCH_LIBRARIES: ${TORCH_LIBRARIES}")
 MESSAGE("OpenCV_LIBS: ${OpenCV_LIBS}")
 
 # Link Torchlibs
-target_link_libraries(TorchFace ${OpenCV_LIBS})
 target_link_libraries(TorchFace ${TORCH_LIBRARIES})
+target_link_libraries(TorchFace ${OpenCV_LIBS})
 target_link_libraries(TorchFace ${OpenBLAS_LIBRARIES})
 # Link other external
 target_link_libraries(TorchFace LandmarkDetector)

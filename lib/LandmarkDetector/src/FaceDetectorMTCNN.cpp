@@ -642,6 +642,7 @@ bool FaceDetectorMTCNN::DetectFaces(std::vector<cv::Rect_<float> >& o_regions, c
 	int face_support = 12;
 	int num_scales = floor(log((double)min_face_size / (double)min_dim) / log(pyramid_factor)) + 1;
 
+
 	cv::Mat input_img;
 
 	// Force the image to three channels
@@ -656,11 +657,7 @@ bool FaceDetectorMTCNN::DetectFaces(std::vector<cv::Rect_<float> >& o_regions, c
 
 	cv::Mat img_float;
 	input_img.convertTo(img_float, CV_32FC3);
-	
-	std::cout<<"num_scales: "<<num_scales<<std::endl;
-	std::cout<<"min_face_size: "<<min_face_size<<std::endl;
-	std::cout<<"height_orig: "<<height_orig<<std::endl;
-	std::cout<<"width_orig: "<<width_orig<<std::endl;
+
 
 	std::vector<cv::Rect_<float> > proposal_boxes_all;
 	std::vector<float> scores_all;

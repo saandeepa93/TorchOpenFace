@@ -3,20 +3,25 @@ project(ex3)
 
 # Threw some Dlib error.
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
+set(CUDNN_INCLUDE_DIR /usr/local/cuda/include)
+set(CUDNN_LIBRARY /usr/local/cuda/lib64)
+set(USE_CUDNN 1)
 
 # set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 # OpenBLAS
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
+
+
+
 # find_package(OpenBLAS REQUIRED)
 find_package(OpenBLAS REQUIRED PATHS "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/OpenBLAS/lib/cmake/openblas" NO_DEFAULT_PATH)
 if ( ${OpenBLAS_FOUND} )
-    MESSAGE("OpenBLAS information:")
-    MESSAGE("  OpenBLAS_LIBRARIES: ${OpenBLAS_LIBRARIES}")
-    MESSAGE("OpenBLAS FOUND IN ${OpenBLAS_DIR}")
-    MESSAGE("OpenBLAS_INCLUDE_DIR: ${OpenBLAS_INCLUDE_DIR}")
+MESSAGE("OpenBLAS information:")
+MESSAGE("  OpenBLAS_LIBRARIES: ${OpenBLAS_LIBRARIES}")
+MESSAGE("OpenBLAS FOUND IN ${OpenBLAS_DIR}")
+MESSAGE("OpenBLAS_INCLUDE_DIR: ${OpenBLAS_INCLUDE_DIR}")
 else()
-    MESSAGE(FATAL_ERROR "OpenBLAS not found in the system.")
+MESSAGE(FATAL_ERROR "OpenBLAS not found in the system.")
 endif()
 
 # OpenCV
@@ -24,7 +29,7 @@ endif()
 
 set(OpenCV_DIR "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/lib/cmake/opencv4/")
 find_package( OpenCV 4.0 REQUIRED COMPONENTS core imgproc calib3d highgui objdetect
-          PATHS "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/lib/cmake/opencv4/" NO_DEFAULT_PATH )
+PATHS "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/lib/cmake/opencv4/" NO_DEFAULT_PATH )
 MESSAGE("OpenCV FOUND IN ${OpenCV_DIR}")
 
 
@@ -34,16 +39,17 @@ find_package( Boost 1.5.9 COMPONENTS filesystem system)
 # dlib
 # set(dlib_DIR /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external//usr/local/lib/)
 find_package(dlib 19.13 REQUIRED 
-    PATHS "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/usr/local/lib/cmake/dlib" NO_DEFAULT_PATH)
+PATHS "/home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/usr/local/lib/cmake/dlib" NO_DEFAULT_PATH)
 # find_package(dlib 19.13 REQUIRED)
 if ( ${dlib_FOUND} )
-    MESSAGE("DLIB FOUND IN ${dlib_DIR}")
+MESSAGE("DLIB FOUND IN ${dlib_DIR}")
 endif()
+
 
 # LibTorch
 SET(CMAKE_PREFIX_PATH /home/saandeepaath-admin/projects/learning/cpp_cmake/example3/external/pytorch)
+# SET(CMAKE_PREFIX_PATH /home/saandeepaath-admin/anaconda3/envs/cpp/lib/python3.10/site-packages/torch)
 find_package(Torch REQUIRED)
-
 
 # LandmarkDetector library
 add_subdirectory(lib/LandmarkDetector)
@@ -56,5 +62,7 @@ add_subdirectory(lib/Utilities)
 # OpenFace Torch
 add_subdirectory(lib/TorchFace)
 
+find_package(CUDAToolkit REQUIRED)
+message(STATUS "CUDA Toolkit version detected as ${CUDAToolkit_VERSION}")
 # EXE
 # add_subdirectory(exe)

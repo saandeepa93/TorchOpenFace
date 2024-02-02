@@ -1,4 +1,4 @@
-#include "TorchFace.h"
+#include "TorchFaceLandmarkImg.h"
 #include <opencv2/dnn.hpp>
 #include <typeinfo>
 #include "TorchUtils.h"
@@ -45,7 +45,7 @@ torch::Tensor ToTensor(std::vector<T> mats, std::string template_type){
 
 // Class primary methods
 // Constructor
-TorchFace::TorchFace(std::vector<std::string> arguments, const c10::Dict<std::string, c10::IValue>& misc_args){
+TorchFaceLandmarkImg::TorchFaceLandmarkImg(std::vector<std::string> arguments, const c10::Dict<std::string, c10::IValue>& misc_args){
 
   this->arguments = arguments;
   this->vis = misc_args.at("vis").toBool();
@@ -76,7 +76,7 @@ TorchFace::TorchFace(std::vector<std::string> arguments, const c10::Dict<std::st
   }
 }
 
-void TorchFace::SetImageParams(cv::Mat latest_frame){
+void TorchFaceLandmarkImg::SetImageParams(cv::Mat latest_frame){
   this->image_reader.image_height = latest_frame.size().height;
   this->image_reader.image_width = latest_frame.size().width;
   this->image_reader.SetCameraIntrinsics(-1, -1, -1, -1);
@@ -84,7 +84,7 @@ void TorchFace::SetImageParams(cv::Mat latest_frame){
 }
 
 // Face detect 
-std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image, \
+std::vector<cv::Rect_<float> > TorchFaceLandmarkImg::FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image, \
       const c10::Dict<std::string, c10::IValue>& ex_args, const int& i){
   std::vector<cv::Rect_<float> > face_detections;
 
@@ -133,7 +133,7 @@ std::vector<cv::Rect_<float> > TorchFace::FaceDetection(const cv::Mat_<uchar>& g
 }
 
 // FaceLandmarkImg executable code
-c10::Dict<std::string, torch::Tensor> TorchFace::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<std::string, c10::IValue> ex_args){
+c10::Dict<std::string, torch::Tensor> TorchFaceLandmarkImg::ExtractFeatures(torch::Tensor rgb_tensors, c10::Dict<std::string, c10::IValue> ex_args){
   // Variables to hold data per image
   std::vector<std::vector<cv::Mat>> batch_sim_warped_img;
   std::vector<std::vector<std::vector<double>>> batch_face_detection;
@@ -153,6 +153,7 @@ c10::Dict<std::string, torch::Tensor> TorchFace::ExtractFeatures(torch::Tensor r
   // Open Recorder
   this->recording_params = Utilities::RecorderOpenFaceParameters (this->arguments, false, false,
                                                                 this->image_reader.fx, this->image_reader.fy, this->image_reader.cx, this->image_reader.cy);
+  Utilities::RecorderOpenFace open_face_rec(fnames[0],this->recording_params, this->arguments);
   for (int i = 0; i < rgb_tensors.size(0); ++i){
 
     // Variables to hold data per face in an image
@@ -165,7 +166,6 @@ c10::Dict<std::string, torch::Tensor> TorchFace::ExtractFeatures(torch::Tensor r
     std::vector<bool> success_flags;
     
 
-    Utilities::RecorderOpenFace open_face_rec(fnames[i],this->recording_params, this->arguments);
     cv::Mat rgb_image = ToMat(rgb_tensors[i]);
     cv::Mat_<uchar> grayscale_image;
     Utilities::ConvertToGrayscale_8bit(rgb_image, grayscale_image);
@@ -233,9 +233,6 @@ c10::Dict<std::string, torch::Tensor> TorchFace::ExtractFeatures(torch::Tensor r
         open_face_rec.WriteObservationTracked();
       }
 
-      if (this->rec){
-        open_face_rec.Close();
-      }
 
       // WRITE Face level OUTPUT
       single_sim_warped_img.push_back(sim_warped_img);
@@ -268,6 +265,9 @@ c10::Dict<std::string, torch::Tensor> TorchFace::ExtractFeatures(torch::Tensor r
 
   }
   
+  if (this->rec){
+      open_face_rec.Close();
+  }
 
   torch::Tensor warped_tensor;
   torch::Tensor fd_tensor;

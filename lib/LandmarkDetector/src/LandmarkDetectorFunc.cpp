@@ -222,11 +222,13 @@ bool LandmarkDetector::DetectLandmarksInVideo(const cv::Mat &rgb_image, CLNF& cl
 
 	if(grayscale_image.empty())
 	{
+
 		Utilities::ConvertToGrayscale_8bit(rgb_image, grayscale_image);
 	}
 
 	// Indicating that this is a first detection in video sequence or after restart
 	bool initial_detection = !clnf_model.tracking_initialised;
+  
 
 	// Only do it if there was a face detection at all
 	if(clnf_model.tracking_initialised)
@@ -301,7 +303,10 @@ bool LandmarkDetector::DetectLandmarksInVideo(const cv::Mat &rgb_image, CLNF& cl
 			preference_det.x = clnf_model.preference_det.x * grayscale_image.cols;
 			preference_det.y = clnf_model.preference_det.y * grayscale_image.rows;
 			clnf_model.preference_det = cv::Point(-1, -1);
+
 		}
+
+
 
 		bool face_detection_success;
 		if(params.curr_face_detector == FaceModelParameters::HOG_SVM_DETECTOR)

@@ -21,14 +21,14 @@
 #include <RecorderOpenFace.h>
 #include <RecorderOpenFaceParameters.h>
 
-#ifndef TORCHFACE_H
-#define TORCHFACE_H
+#ifndef TorchFaceLandmarkImg_H
+#define TorchFaceLandmarkImg_H
 
 namespace TorchFaceAnalysis{
 
-  class TorchFace:public torch::CustomClassHolder {
+  class TorchFaceLandmarkImg:public torch::CustomClassHolder {
     public:
-      TorchFace(std::vector<std::string> arguments, const c10::Dict<std::string, c10::IValue>& misc_args);
+      TorchFaceLandmarkImg(std::vector<std::string> arguments, const c10::Dict<std::string, c10::IValue>& misc_args);
       c10::Dict<std::string, torch::Tensor> ExtractFeatures(torch::Tensor img, c10::Dict<std::string, c10::IValue> ex_args);
       void SetImageParams(cv::Mat img);
       std::vector<cv::Rect_<float> > FaceDetection(const cv::Mat_<uchar>& grayscale_image, const cv::Mat& rgb_image, \
