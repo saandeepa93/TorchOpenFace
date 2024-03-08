@@ -78,5 +78,12 @@ namespace TorchUtilities{
   }
 
 
+  std::string extract_subject_phase(std::string str){
+    size_t pos = str.find_last_of('/'); // find position of last '/'
+    std::string sub = str.substr(0, pos); // extract substring
+    return sub;
+
+  }
+
 
 }

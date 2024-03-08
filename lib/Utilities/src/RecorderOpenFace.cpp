@@ -188,7 +188,12 @@ void RecorderOpenFace::PrepareRecording(const std::string& in_filename)
 		{
 			this->media_filename = out_name + "." + params.imageFormatVisualization();
 			metadata_file << "Output image:" << this->media_filename << std::endl;
-			this->media_filename = (fs::path(record_root) / this->media_filename).string();
+			// this->media_filename = (fs::path(record_root) / this->media_filename).string();
+			// MODIFIED
+			std::string new_record_root = record_root + "/viz";
+			if (!fs::exists(new_record_root))
+				fs::create_directory(new_record_root);
+			this->media_filename = (fs::path(new_record_root)/ this->media_filename).string();
 		}
 	}
 
@@ -343,9 +348,12 @@ void RecorderOpenFace::WriteObservation()
 			params.outputAUs(), params.outputGaze(), num_face_landmarks, num_model_modes, num_eye_landmarks, au_names_class, au_names_reg);
 	}
 
-	this->csv_recorder.WriteLine(face_id, frame_number, timestamp, landmark_detection_success, 
+	this->csv_recorder.WriteLine(face_id, frame_name, frame_number, timestamp, landmark_detection_success, 
 		landmark_detection_confidence, landmarks_2D, landmarks_3D, pdm_params_local, pdm_params_global, head_pose,
 		gaze_direction0, gaze_direction1, gaze_angle, eye_landmarks2D, eye_landmarks3D, au_intensities, au_occurences);
+	// this->csv_recorder.WriteLine(face_id, frame_number, timestamp, landmark_detection_success, 
+	// 	landmark_detection_confidence, landmarks_2D, landmarks_3D, pdm_params_local, pdm_params_global, head_pose,
+	// 	gaze_direction0, gaze_direction1, gaze_angle, eye_landmarks2D, eye_landmarks3D, au_intensities, au_occurences);
 
 	if(params.outputHOG())
 	{
@@ -369,10 +377,15 @@ void RecorderOpenFace::WriteObservation()
 		char name[100];
 
 		// Filename is based on frame number (TODO stringstream this)
-		if(params.isSequence())
-			std::sprintf(name, "frame_det_%02d_%06d.", face_id, frame_number);
-		else
-			std::sprintf(name, "face_det_%06d.", face_id);
+		// if(params.isSequence())
+		// 	std::sprintf(name, "frame_det_%02d_%06d.", face_id, frame_number);
+		// else
+		// 	std::sprintf(name, "face_det_%06d.", face_id);
+
+    	// Create a substring from the beginning to the last dot
+		size_t last_dot = frame_name.find_last_of(".");
+    	std::string basename = frame_name.substr(0, last_dot);
+		std::sprintf(name, "%s_%06d.", basename.c_str(), frame_number);
 
 		// Construct the output filename
 		std::string out_file = (fs::path(aligned_output_directory) / fs::path(std::string(name) + params.imageFormatAligned())).string();
@@ -436,7 +449,12 @@ void RecorderOpenFace::WriteObservationTracked()
 			vis_to_out_queue.push(std::pair<std::string, cv::Mat>("", vis_to_out));
 		}
 		else
-		{
+		{	
+			// UPDATED
+			size_t pos = media_filename.find_last_of('/');
+			media_filename.replace(pos + 1, std::string::npos, frame_name);
+			// UPDATED
+
 			vis_to_out_queue.push(std::pair<std::string, cv::Mat>(media_filename, vis_to_out));
 		}
 
@@ -460,6 +478,14 @@ void RecorderOpenFace::SetObservationFrameNumber(int frame_number)
 {
 	this->frame_number = frame_number;
 }
+
+// Required observations for video/image-sequence
+void RecorderOpenFace::SetObservationFrameName(std::string frame_name)
+{
+	this->frame_name = frame_name;
+}
+
+
 
 // If in multiple face mode, identifying which face was tracked
 void RecorderOpenFace::SetObservationFaceID(int face_id)

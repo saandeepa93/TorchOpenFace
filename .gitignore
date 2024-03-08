@@ -121,3 +121,6 @@ external/share
 models
 data
 wiki.md
+shed
+slurm
+build

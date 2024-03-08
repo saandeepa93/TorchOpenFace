@@ -78,6 +78,9 @@ namespace Utilities
 		// Required observations for video/image-sequence
 		void SetObservationFrameNumber(int frame_number);
 
+		// Required to track frames in gallery/probe
+		void SetObservationFrameName(std::string frame_name);
+
 		// If in multiple face mode, identifying which face was tracked
 		void SetObservationFaceID(int face_id);
 
@@ -146,6 +149,7 @@ namespace Utilities
 		double timestamp;
 		int face_id;
 		int frame_number;
+		std::string frame_name;
 
 		// Facial landmark related observations
 		cv::Mat_<float> landmarks_2D;

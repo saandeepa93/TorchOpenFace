@@ -36,7 +36,7 @@ namespace TorchFaceAnalysis{
       //     const c10::Dict<std::string, c10::IValue>& ex_args, const int& i);
 
       std::vector<std::string> arguments;
-      bool vis; bool rec; bool first_only;
+      bool vis; bool rec; bool first_only; bool gallery_mode;
       
       // OpenFace class Members
       Utilities::RecorderOpenFaceParameters recording_params;

@@ -26,5 +26,6 @@ namespace TorchUtilities{
   void print_vec(std::vector<std::string> args);
   void print_au(std::vector<std::pair<std::string, double>> data);
   void write_cv_img(cv::Mat img, std::string fname);
+  std::string extract_subject_phase(std::string str);
 
 };

@@ -97,7 +97,7 @@ features = obj.ExtractFeatures(video.clone().detach().cpu().contiguous(), ex_arg
 ## **Directory Structure**
 
 The primary library which binds OpenFace pure C++ with PyTorch C++ in present under `lib/TorchFace`
-The rest of the directories under `lib` are from [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/tree/master/lib/local) original repo. 
+The rest of the directories under `lib` are from [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/tree/master/lib/local) original repo. These libraries have been modified to fit specific project requirements.
 
 ```
 TorchFace/

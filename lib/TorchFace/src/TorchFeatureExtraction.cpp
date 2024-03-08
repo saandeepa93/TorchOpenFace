@@ -51,6 +51,7 @@ TorchFeatureExtraction::TorchFeatureExtraction(std::vector<std::string> argument
   this->vis = misc_args.at("vis").toBool();
   this->rec = misc_args.at("rec").toBool();
   this->first_only = misc_args.at("first_only").toBool();
+  this->gallery_mode = misc_args.at("gallery_mode").toBool();
 
 
   // Set parameters for Face detection models
@@ -94,7 +95,12 @@ c10::Dict<std::string, torch::Tensor> TorchFeatureExtraction::ExtractFeatures(to
   
   // Get all fnames
   std::vector<std::string> fnames = ToVectString(ex_args.at("fname"));
-  std::vector<int64_t> frame_lst = ex_args.at("frame_lst").toIntVector();
+
+  std::vector<std::string> frame_lst = ToVectString(ex_args.at("frame_lst"));
+  // if (this->gallery_mode)
+  //   std::vector<std::string> frame_lst = ToVectString(ex_args.at("frame_lst"));
+  // else
+  //   std::vector<int64_t> frame_lst = ex_args.at("frame_lst").toIntVector();
 
   // Flip channels
   rgb_tensors = rgb_tensors.flip(1);
@@ -125,6 +131,11 @@ c10::Dict<std::string, torch::Tensor> TorchFeatureExtraction::ExtractFeatures(to
 
     // Step: Perform landmark detection for every face detected
     bool success = LandmarkDetector::DetectLandmarksInVideo(rgb_image,  this->face_model, det_parameters, grayscale_image);
+
+    if (!success){
+      continue;
+    }
+
     // Estimate head pose and eye gaze				
     cv::Vec6d pose_estimate = LandmarkDetector::GetPose(face_model, sequence_reader.fx, sequence_reader.fy, sequence_reader.cx, sequence_reader.cy);
     
@@ -169,7 +180,11 @@ c10::Dict<std::string, torch::Tensor> TorchFeatureExtraction::ExtractFeatures(to
       open_face_rec.SetObservationGaze(gazeDirection0, gazeDirection1, gazeAngle, LandmarkDetector::CalculateAllEyeLandmarks(face_model), LandmarkDetector::Calculate3DEyeLandmarks(face_model, sequence_reader.fx, sequence_reader.fy, sequence_reader.cx, sequence_reader.cy));
       open_face_rec.SetObservationFaceAlign(sim_warped_img);
       open_face_rec.SetObservationFaceID(0);
-      open_face_rec.SetObservationFrameNumber(frame_lst[i]);
+      // open_face_rec.SetObservationFrameNumber(frame_lst[i]);
+      open_face_rec.SetObservationFrameNumber(i);
+      if (this->gallery_mode){
+        open_face_rec.SetObservationFrameName(frame_lst[i]);
+      }
       open_face_rec.WriteObservation();
     }
 
@@ -180,34 +195,6 @@ c10::Dict<std::string, torch::Tensor> TorchFeatureExtraction::ExtractFeatures(to
     }
 
 
-    // WRITE Face level OUTPUT
-    // single_sim_warped_img.push_back(sim_warped_img);
-    // single_face_detection.push_back(ToVector(face_detections[face]));
-    
-    // std::vector<double> au_reg;
-    // for (auto au : this->face_analyser.GetCurrentAUsReg())
-    // {
-    //   au_reg.push_back(au.second);
-    // }
-    // single_au_intensities.push_back(au_reg);
-    // std::vector<double> au_occ;
-    // for (auto au : this->face_analyser.GetCurrentAUsClass())
-    // {
-    //   au_occ.push_back(au.second);
-    // }
-    // single_au_occurence.push_back(au_occ);
-    // single_detected_landmarks.push_back(face_model.detected_landmarks);
-    // single_head_pose.push_back(pose_estimate);
-
-
-    // // Write Image-level output
-    // batch_sim_warped_img.push_back(single_sim_warped_img);
-    // batch_face_detection.push_back(single_face_detection);
-    // batch_au_intensities.push_back(single_au_intensities);
-    // batch_au_occurence.push_back(single_au_occurence);
-    // batch_detected_landmarks.push_back(single_detected_landmarks);
-    // batch_head_pose.push_back(single_head_pose);
-
   }
   
   if (this->rec){
@@ -215,39 +202,7 @@ c10::Dict<std::string, torch::Tensor> TorchFeatureExtraction::ExtractFeatures(to
       sequence_reader.Close();
   }
 
-  torch::Tensor warped_tensor;
-  torch::Tensor fd_tensor;
-  torch::Tensor aui_tensor;
-  torch::Tensor auo_tensor;
-  torch::Tensor lm_tensor;
-  torch::Tensor hp_tensor;
-
-  // // ADD: Feature to handle multiple face detections while returning output.
-  // if (this->first_only){
-  //   std::vector<cv::Mat> warped_img = squeeze<cv::Mat>(batch_sim_warped_img);
-  //   std::vector<std::vector<double>> face_detection = squeeze<std::vector<double>>(batch_face_detection);
-  //   std::vector<std::vector<double>> au_intensities = squeeze<std::vector<double>>(batch_au_intensities);
-  //   std::vector<std::vector<double>> au_occurence = squeeze<std::vector<double>>(batch_au_occurence);
-  //   std::vector<cv::Mat_<float>> detected_landmarks = squeeze<cv::Mat_<float>>(batch_detected_landmarks);
-  //   std::vector<cv::Vec6d> head_pose = squeeze<cv::Vec6d>(batch_head_pose);
-
-  //   warped_tensor = ToTensor<cv::Mat>(warped_img, "Mat");
-  //   fd_tensor = ToTensor<std::vector<double>>(face_detection, "vecD");
-  //   aui_tensor = ToTensor<std::vector<double>>(au_intensities, "vecD");
-  //   auo_tensor = ToTensor<std::vector<double>>(au_occurence, "vecD");
-  //   lm_tensor = ToTensor<cv::Mat_<float>>(detected_landmarks, "");
-  //   hp_tensor = ToTensor<cv::Vec6d>(head_pose, "");
-  // }
-  
   c10::Dict<std::string, torch::Tensor> all_feats_dict;
-  all_feats_dict.insert("aligned", warped_tensor);
-  all_feats_dict.insert("bbox", fd_tensor);
-  all_feats_dict.insert("lm", lm_tensor);
-  all_feats_dict.insert("headpose", hp_tensor);
-  all_feats_dict.insert("au_int", aui_tensor);
-  all_feats_dict.insert("au_occ", auo_tensor);
-
-  // std::vector<torch::Tensor> all_feats = {warped_tensor, fd_tensor, aui_tensor, auo_tensor, lm_tensor, hp_tensor};
   return all_feats_dict;
 
 }

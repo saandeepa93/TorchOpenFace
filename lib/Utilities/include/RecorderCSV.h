@@ -13,19 +13,19 @@
 //       reports and manuals, must cite at least one of the following works:
 //
 //       OpenFace 2.0: Facial Behavior Analysis Toolkit
-//       Tadas Baltrušaitis, Amir Zadeh, Yao Chong Lim, and Louis-Philippe Morency
+//       Tadas Baltruï¿½aitis, Amir Zadeh, Yao Chong Lim, and Louis-Philippe Morency
 //       in IEEE International Conference on Automatic Face and Gesture Recognition, 2018  
 //
 //       Convolutional experts constrained local model for facial landmark detection.
-//       A. Zadeh, T. Baltrušaitis, and Louis-Philippe Morency,
+//       A. Zadeh, T. Baltruï¿½aitis, and Louis-Philippe Morency,
 //       in Computer Vision and Pattern Recognition Workshops, 2017.    
 //
 //       Rendering of Eyes for Eye-Shape Registration and Gaze Estimation
-//       Erroll Wood, Tadas Baltrušaitis, Xucong Zhang, Yusuke Sugano, Peter Robinson, and Andreas Bulling 
+//       Erroll Wood, Tadas Baltruï¿½aitis, Xucong Zhang, Yusuke Sugano, Peter Robinson, and Andreas Bulling 
 //       in IEEE International. Conference on Computer Vision (ICCV),  2015 
 //
 //       Cross-dataset learning and person-specific normalisation for automatic Action Unit detection
-//       Tadas Baltrušaitis, Marwa Mahmoud, and Peter Robinson 
+//       Tadas Baltruï¿½aitis, Marwa Mahmoud, and Peter Robinson 
 //       in Facial Expression Recognition and Analysis Challenge, 
 //       IEEE International Conference on Automatic Face and Gesture Recognition, 2015 
 //
@@ -65,7 +65,7 @@ namespace Utilities
 		// Closing the file and cleaning up
 		void Close();
 
-		void WriteLine(int face_id, int frame_num, double time_stamp, bool landmark_detection_success, double landmark_confidence,
+		void WriteLine(int face_id, std::string frame_name, int frame_num, double time_stamp, bool landmark_detection_success, double landmark_confidence,
 			const cv::Mat_<float>& landmarks_2D, const cv::Mat_<float>& landmarks_3D, const cv::Mat_<float>& pdm_model_params, const cv::Vec6f& rigid_shape_params, cv::Vec6f& pose_estimate,
 			const cv::Point3f& gazeDirection0, const cv::Point3f& gazeDirection1, const cv::Vec2f& gaze_angle, const std::vector<cv::Point2f>& eye_landmarks2d, const std::vector<cv::Point3f>& eye_landmarks3d,
 			const std::vector<std::pair<std::string, double> >& au_intensities, const std::vector<std::pair<std::string, double> >& au_occurences);

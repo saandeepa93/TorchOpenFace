@@ -13,19 +13,19 @@
 //       reports and manuals, must cite at least one of the following works:
 //
 //       OpenFace 2.0: Facial Behavior Analysis Toolkit
-//       Tadas Baltrušaitis, Amir Zadeh, Yao Chong Lim, and Louis-Philippe Morency
+//       Tadas Baltruï¿½aitis, Amir Zadeh, Yao Chong Lim, and Louis-Philippe Morency
 //       in IEEE International Conference on Automatic Face and Gesture Recognition, 2018  
 //
 //       Convolutional experts constrained local model for facial landmark detection.
-//       A. Zadeh, T. Baltrušaitis, and Louis-Philippe Morency,
+//       A. Zadeh, T. Baltruï¿½aitis, and Louis-Philippe Morency,
 //       in Computer Vision and Pattern Recognition Workshops, 2017.    
 //
 //       Rendering of Eyes for Eye-Shape Registration and Gaze Estimation
-//       Erroll Wood, Tadas Baltrušaitis, Xucong Zhang, Yusuke Sugano, Peter Robinson, and Andreas Bulling 
+//       Erroll Wood, Tadas Baltruï¿½aitis, Xucong Zhang, Yusuke Sugano, Peter Robinson, and Andreas Bulling 
 //       in IEEE International. Conference on Computer Vision (ICCV),  2015 
 //
 //       Cross-dataset learning and person-specific normalisation for automatic Action Unit detection
-//       Tadas Baltrušaitis, Marwa Mahmoud, and Peter Robinson 
+//       Tadas Baltruï¿½aitis, Marwa Mahmoud, and Peter Robinson 
 //       in Facial Expression Recognition and Analysis Challenge, 
 //       IEEE International Conference on Automatic Face and Gesture Recognition, 2015 
 //
@@ -71,11 +71,13 @@ bool RecorderCSV::Open(std::string output_file_name, bool is_sequence, bool outp
 	// Different headers if we are writing out the results on a sequence or an individual image
 	if(this->is_sequence)
 	{
-		output_file << "frame,face_id,timestamp,confidence,success";
+		// output_file << "frame,face_id,timestamp,confidence,success";
+		output_file << "frame,face_id,frame_name,timestamp,confidence,success";
 	}
 	else
 	{
-		output_file << "face,confidence";
+		// output_file << "face,confidence,";
+		output_file << "face,frame_name,confidence";
 	}
 
 	if (output_gaze)
@@ -169,7 +171,7 @@ bool RecorderCSV::Open(std::string output_file_name, bool is_sequence, bool outp
 
 }
 
-void RecorderCSV::WriteLine(int face_id, int frame_num, double time_stamp, bool landmark_detection_success, double landmark_confidence,
+void RecorderCSV::WriteLine(int face_id, std::string frame_name , int frame_num, double time_stamp, bool landmark_detection_success, double landmark_confidence,
 	const cv::Mat_<float>& landmarks_2D, const cv::Mat_<float>& landmarks_3D, const cv::Mat_<float>& pdm_model_params, const cv::Vec6f& rigid_shape_params, cv::Vec6f& pose_estimate,
 	const cv::Point3f& gazeDirection0, const cv::Point3f& gazeDirection1, const cv::Vec2f& gaze_angle, const std::vector<cv::Point2f>& eye_landmarks2d, const std::vector<cv::Point3f>& eye_landmarks3d,
 	const std::vector<std::pair<std::string, double> >& au_intensities, const std::vector<std::pair<std::string, double> >& au_occurences)
@@ -188,7 +190,7 @@ void RecorderCSV::WriteLine(int face_id, int frame_num, double time_stamp, bool 
 	{
 		
 		output_file << std::setprecision(3);
-		output_file << frame_num << "," << face_id << "," << time_stamp;
+		output_file << frame_num << "," << face_id << "," << frame_name << "," << time_stamp;
 		output_file << std::setprecision(2);
 		output_file << "," << landmark_confidence;
 		output_file << std::setprecision(0);
@@ -197,7 +199,8 @@ void RecorderCSV::WriteLine(int face_id, int frame_num, double time_stamp, bool 
 	else
 	{
 		output_file << std::setprecision(3);
-		output_file << face_id << "," << landmark_confidence;
+		// output_file << face_id << "," << landmark_confidence;
+		output_file << face_id<< "," << frame_name << "," << landmark_confidence;
 	}
 	// Output the estimated gaze
 	if (output_gaze)
