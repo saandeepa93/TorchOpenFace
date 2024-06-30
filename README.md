@@ -1,6 +1,6 @@
 # **TorchFace**
 
-### This repository is to compile [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace) with PyTorch C++ frontend. Currently, the repo implements only `FaceLandmarkImg` executable. The work  
+### This repository is to compile [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace) with PyTorch C++ frontend. The repo implements both `FaceLandmarkImg` and `FeatureExtraction` executable. 
 
 # **Dependency Installation**
 **Follow installation steps in the [wiki](https://github.com/saandeepa93/TorchOpenFace/wiki/Unix-Setup) page. Update the CMakeLists.txt files accordingly.**
